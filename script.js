@@ -162,11 +162,7 @@ if (mouseEffectCanvas) {
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    window.addEventListener('mousemove', event => {
-        const x = event.clientX;
-        const y = event.clientY;
-        const count = 4;
-
+    const addParticles = (x, y, count = 4) => {
         for (let i = 0; i < count; i++) {
             particles.push({
                 x,
@@ -179,7 +175,31 @@ if (mouseEffectCanvas) {
                 hue: 190 + Math.random() * 30,
             });
         }
+    };
+
+    window.addEventListener('mousemove', event => {
+        addParticles(event.clientX, event.clientY, 4);
     });
+
+    window.addEventListener('pointermove', event => {
+        if (event.pointerType === 'touch' || event.pointerType === 'pen') {
+            addParticles(event.clientX, event.clientY, 6);
+        }
+    });
+
+    window.addEventListener('touchstart', event => {
+        if (event.touches && event.touches.length) {
+            const touch = event.touches[0];
+            addParticles(touch.clientX, touch.clientY, 6);
+        }
+    }, { passive: true });
+
+    window.addEventListener('touchmove', event => {
+        if (event.touches && event.touches.length) {
+            const touch = event.touches[0];
+            addParticles(touch.clientX, touch.clientY, 5);
+        }
+    }, { passive: true });
 
     const drawParticle = particle => {
         const gradient = ctx.createRadialGradient(particle.x, particle.y, 0, particle.x, particle.y, particle.radius);
