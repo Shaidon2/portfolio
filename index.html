@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Shaidon Hirjee — Portfolio</title>
+    <meta name="description"
+        content="Shaidon Hirjee — Web Developer, Graphic Designer &amp; Freelancer based in Durban, South Africa.">
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+
+<body>
+    <canvas id="mouse-effect-canvas" class="mouse-effect-canvas"></canvas>
+    <header>
+        <a class="logo" href="index.html">Shaidon.</a>
+
+        <button class="burger" id="menu-icon" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="navbar">
+            <a href="#home" class="active">home</a>
+            <a href="#services">services</a>
+            <a href="#resume">Resume</a>
+            <a href="#portfolio">portfolio</a>
+            <a href="#contact">contact</a>
+        </nav>
+
+    </header>
+
+    <div id="nav-overlay"></div>
+
+    <!-- home section starts -->
+    <section id="home" class="home active">
+
+
+        <div class="home-detail">
+            <h1>I'm Shaidon</h1>
+            <h2>I am a
+                <span style="--i:4;" data-text="Web Developer">Web Developer</span>
+                <span style="--i:3;" data-text="Graphic Designer">Graphic Designer</span>
+                <span style="--i:2;" data-text="Freelancer">Freelancer</span>
+                <span style="--i:1;" data-text="App developer">App Developer</span>
+            </h2>
+            <p>Hi I'm a passionate developer with a strong foundation in web development, mobile apps and Graphic
+                Design.<br>I enjoy building efficient scalable solutions and i am continuously learning new technologies
+                to solve real world problems. Whether it's collaborating with teams or tackling solo projects, I am
+                always driven by clean code and creative thinking.</p>
+
+            <div class="btn">
+                <a href="#contact" class="btne">Hire Me</a>
+                <div class="socials">
+                    <a href="#"><i class='bx bxl-facebook'></i></a>
+                    <a href="#"><i class='bx bxl-instagram'></i></a>
+                    <a href="#"><i class='bx bxl-whatsapp'></i></a>
+                    <a href="#"><i class='bx bxl-github'></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="home-img">
+            <div class="img-box">
+                <div class="img-item">
+                    <img src="images/me.png" alt="">
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <--home section ends-->
+
+        <!-- services section starts -->
+        <section id="services" class="services">
+            <h2 class="heading">my <span>Services</span></h2>
+            <div class="services-container">
+
+                <div class="services-box">
+                    <div class="icons">
+                        <i class='bx bx-code-block'></i>
+                        <a href=""><i class='bx bx-arrow-back'></i></a>
+                    </div>
+                    <h3>programming</h3>
+                    <p>Build custom web applications and automation scripts using JavaScript, Node.js, and modern
+                        frameworks for fast, scalable solutions.</p>
+                </div>
+
+                <div class="services-box">
+                    <div class="icons">
+                        <i class='bx bxs-paint'></i>
+                        <a href=""><i class='bx bx-arrow-back'></i></a>
+                    </div>
+                    <h3>UI/UX designer</h3>
+                    <p>Design clear, user-centered interfaces and experiences that improve usability and guide visitors
+                        through your product.</p>
+                </div>
+
+                <div class="services-box">
+                    <div class="icons">
+                        <i class='bx bx-code-alt'></i>
+                        <a href=""><i class='bx bx-arrow-back'></i></a>
+                    </div>
+                    <h3>web development</h3>
+                    <p>Create responsive websites, landing pages, and web apps with HTML, CSS, JavaScript, and
+                        best-practice responsive design.</p>
+                </div>
+
+                <div class="services-box">
+                    <div class="icons">
+                        <i class='bx bxs-palette'></i>
+                        <a href=""><i class='bx bx-arrow-back'></i></a>
+                    </div>
+                    <h3>graphic design </h3>
+                    <p>Develop branding, logos, and marketing visuals using Adobe Creative Suite to give businesses a
+                        polished visual identity.</p>
+                </div>
+
+                <div class="services-box">
+                    <div class="icons">
+                        <i class='bx bx-trending-up'></i>
+                        <a href=""><i class='bx bx-arrow-back'></i></a>
+                    </div>
+                    <h3>SEO</h3>
+                    <p>Optimize website structure, content, and performance to improve search visibility and help more
+                        users find your services.</p>
+                </div>
+
+                <div class="services-box">
+                    <div class="icons">
+                        <i class='bx bx-slideshow'></i>
+                        <a href=""><i class='bx bx-arrow-back'></i></a>
+                    </div>
+                    <h3>video editing </h3>
+                    <p>Produce polished videos and motion assets for social media, ads, and promotional campaigns with
+                        professional editing techniques.</p>
+                </div>
+
+            </div>
+
+        </section>
+        <--services section ends-->
+
+            <!-- resume section starts -->
+            <section id="resume" class="resume">
+                <div class="resume-container">
+                    <div class="resume-box">
+                        <h2>Why hire me?</h2>
+                        <p class="desc">I deliver polished digital products through a strong blend of technical skill,
+                            creative design, and dependable communication. My work is focused on clean, maintainable
+                            solutions that help brands stand out online.</p>
+                        <button class="resume-btn active">Experience</button>
+                        <button class="resume-btn">Education</button>
+                        <button class="resume-btn">Skills</button>
+                        <button class="resume-btn">About me</button>
+                    </div>
+                    <div class="resume-box">
+                        <div class="resume-detail Experience active">
+                            <h2 class="heading">My <span>Experience</span></h2>
+                            <p class="desc">View and download my professional CV to see the full details of my
+                                experience, skills, and achievements.</p>
+                            <div class="resume-list resume-download-list">
+                                <div class="resume-item resume-download-item">
+                                    <a href="files/Curriculum Vitae of NH upd.docx" download
+                                        class="btne download-cv-btn">Download CV</a>
+                                    <p class="desc resume-download-desc">Get a polished copy of my CV with full work
+                                        history, education, and core strengths.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="resume-detail Education">
+                            <h2 class="heading">My <span>Education</span></h2>
+                            <p class="desc">Formal training in web development and digital design, supported by real
+                                client work and continuous learning of new tools.</p>
+                            <div class="resume-list">
+                                <div class="resume-item">
+                                    <p class="year">2002 - 2009</p>
+                                    <h3>Springvale Primary</h3>
+                                    <p class="company">Primary School</p>
+                                    <p>Completed primary education at Springvale Primary School with a strong foundation
+                                        in literacy, numeracy, and basic computing.</p>
+                                </div>
+                                <div class="resume-item">
+                                    <p class="year">2010 - 2013</p>
+                                    <h3>Sutherland High School</h3>
+                                    <p class="company">High School</p>
+                                    <p>Attended Sutherland High School and completed secondary education with studies in
+                                        science, mathematics, and languages.</p>
+                                </div>
+                                <div class="resume-item">
+                                    <p class="year">2014 - 2016</p>
+                                    <h3>Damelin College</h3>
+                                    <p class="company">BCom Marketing and Business Management</p>
+                                    <p>Studied BCom Marketing and Business Management at Damelin College, gaining strong
+                                        business strategy, marketing, and management skills.</p>
+                                </div>
+                                <div class="resume-item">
+                                    <p class="year">2021</p>
+                                    <h3>TEFL Certificate</h3>
+                                    <p class="company">English Language Training</p>
+                                    <p>Earned a TEFL certificate and developed skills in teaching English as a foreign
+                                        language.</p>
+                                </div>
+                                <div class="resume-item">
+                                    <p class="year">2025</p>
+                                    <h3>Full Stack Development Certificate</h3>
+                                    <p class="company">FNB App Academy</p>
+                                    <p>Completed full stack development training focused on web applications, backend
+                                        systems, and modern development workflows.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="resume-detail Skills">
+                            <h2 class="heading">My <span>Skills</span></h2>
+                            <p class="desc">A versatile skill set focused on front-end development, design systems, and
+                                tools that create smooth, modern digital experiences.</p>
+                            <div class="resume-list">
+                                <div class="resume-item">
+                                    <i class='bx bxl-html5'></i>
+                                    <span>HTML5</span>
+                                </div>
+                                <div class="resume-item">
+                                    <i class='bx bxl-css3'></i>
+                                    <span>CSS3</span>
+                                </div>
+                                <div class="resume-item">
+                                    <i class='bx bxl-javascript'></i>
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="resume-item">
+                                    <i class='bx bxl-adobe'></i>
+                                    <span>Adobe</span>
+                                </div>
+                                <div class="resume-item">
+                                    <i class='bx bxl-tailwind-css'></i>
+                                    <span>Tailwind CSS</span>
+                                </div>
+                                <div class="resume-item">
+                                    <i class='bx bx-palette'></i>
+                                    <span>Figma</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="resume-detail About">
+                            <h2 class="heading">About <span>me</span></h2>
+                            <p class="desc">I am a creative technical professional who combines web development, graphic
+                                design, and video production to bring strong ideas to life. I enjoy taking on new
+                                challenges, collaborating with clients, and building memorable digital experiences.</p>
+                            <div class="resume-list">
+                                <div class="resume-item">
+                                    <p>Name: <span>Shaidon Hirjee</span></p>
+                                </div>
+                                <div class="resume-item">
+                                    <p>Age: <span>30</span></p>
+                                </div>
+                                <div class="resume-item">
+                                    <p>Gender: <span>Male</span></p>
+                                </div>
+                                <div class="resume-item">
+                                    <p>Status: <span>Single</span></p>
+                                </div>
+                                <div class="resume-item">
+                                    <p>City: <span>Durban</span></p>
+                                </div>
+                                <div class="resume-item">
+                                    <p>Nationanlity: <span>South African</span></p>
+                                </div>
+                                <div class="resume-item">
+                                    <p>Experience: <span>8+ Years</span></p>
+                                </div>
+                                <div class="resume-item">
+                                    <p>Full time: <span>Available</span></p>
+                                </div>
+                                <div class="resume-item">
+                                    <p>Freelance: <span>Available</span></p>
+                                </div>
+                                <div class="resume-item">
+                                    <p>Mobile NO.<span>(+27) 769765576</span></p>
+                                </div>
+                                <div class="resume-item">
+                                    <p>Email: <span>Niashenh@gmail.com</span></p>
+                                </div>
+                                <div class="resume-item">
+                                    <p>Languages: <span>English</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <--resume section ends-->
+
+                <!-- portfolio section starts -->
+                <section id="portfolio" class="portfolio">
+                    <h2 class="heading">Latest <span>Projects</span></h2>
+                    <div class="portfolio-container">
+                        <div class="portfolio-box">
+                            <div class="portfolio-detail active">
+                                <p class="numb">01</p>
+                                <h3>Brand identity</h3>
+                                <p>Developed a custom logo and social media graphics for a gaming channel, creating a
+                                    bold visual identity that stands out online.</p>
+                                <div class="tech">
+                                    <p>Adobe</p>
+                                </div>
+                                <div class="live-github">
+                                    <a href=""><i class='bx bx-arrow-back'></i><span>Live project</span></a>
+                                    <a href=""><i class='bx bxl-adobe'></i><span>Adobe</span></a>
+                                </div>
+                            </div>
+
+                            <div class="portfolio-detail">
+                                <p class="numb">02</p>
+                                <h3>Logo Intro Animation</h3>
+                                <p>Created a polished logo intro animation in After Effects to add a cinematic brand
+                                    opening and professional motion identity.</p>
+                                <div class="tech">
+                                    <p>After Effects</p>
+                                </div>
+                                <div class="live-github">
+                                    <a href=""><i class='bx bx-arrow-back'></i><span>Live project</span></a>
+                                    <a href=""><i class='bx bxl-adobe'></i><span>Adobe</span></a>
+                                </div>
+                            </div>
+
+                            <div class="portfolio-detail">
+                                <p class="numb">03</p>
+                                <h3>App concept UI</h3>
+                                <p>Designed a clean booking app interface that simplifies navigation and improves the
+                                    user experience on mobile devices.</p>
+                                <div class="tech">
+                                    <p>Adobe</p>
+                                </div>
+                                <div class="live-github">
+                                    <a href=""><i class='bx bx-arrow-back'></i><span>Live project</span></a>
+                                    <a href=""><i class='bx bxl-adobe'></i><span>Adobe</span></a>
+                                </div>
+                            </div>
+
+                            <div class="portfolio-detail">
+                                <p class="numb">04</p>
+                                <h3>Marketing campaign</h3>
+                                <p>Delivered promotional graphics and motion assets for a seasonal campaign to increase
+                                    engagement and brand awareness.</p>
+                                <div class="tech">
+                                    <p>Adobe</p>
+                                </div>
+                                <div class="live-github">
+                                    <a href=""><i class='bx bx-arrow-back'></i><span>Live project</span></a>
+                                    <a href=""><i class='bx bxl-adobe'></i><span>Adobe</span></a>
+                                </div>
+                            </div>
+
+                            <div class="portfolio-detail">
+                                <p class="numb">05</p>
+                                <h3>Portfolio website</h3>
+                                <p>Built a responsive portfolio showcase with smooth interactions and custom visuals to
+                                    highlight client work effectively.</p>
+                                <div class="tech">
+                                    <p>Adobe</p>
+                                </div>
+                                <div class="live-github">
+                                    <a href=""><i class='bx bx-arrow-back'></i><span>Live project</span></a>
+                                    <a href=""><i class='bx bxl-adobe'></i><span>Adobe</span></a>
+                                </div>
+                            </div>
+
+                            <div class="portfolio-detail">
+                                <p class="numb">06</p>
+                                <h3>Video editing</h3>
+                                <p>Edited a short promotional video with motion graphics and sound design to support a
+                                    digital advertising campaign.</p>
+                                <div class="tech">
+                                    <p>Adobe</p>
+                                </div>
+                                <div class="live-github">
+                                    <a href=""><i class='bx bx-arrow-back'></i><span>Live project</span></a>
+                                    <a href=""><i class='bx bxl-adobe'></i><span>Adobe</span></a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="portfolio-box">
+                            <div class="portfolio-carousel">
+                                <div class="img-slide">
+                                    <div class="img-item">
+                                        <img src="images/Gamer logo.png">
+                                    </div>
+                                    <div class="img-item">
+                                        <video src="images/logo intri Dg4U.mp4" controls playsinline loop></video>
+                                    </div>
+                                    <div class="img-item">
+                                        <img src="images/Gamer logo.png">
+                                    </div>
+                                    <div class="img-item">
+                                        <img src="images/Gamer logo.png">
+                                    </div>
+                                    <div class="img-item">
+                                        <img src="images/Gamer logo.png">
+                                    </div>
+                                    <div class="img-item">
+                                        <img src="images/Gamer logo.png">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="navigation">
+                                <button class="arrow-left disabled"><i class='bx bx-chevron-left'></i></button>
+                                <button class="arrow-right"><i class='bx bx-chevron-right'></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+                <-- portfolio section ends-->
+
+                    <!-- contact section starts -->
+                    <section id="contact" class="contact">
+                        <div class="contact-container">
+                            <div class="contact-box">
+                                <h2> Lets work together</h2>
+                                <p>Have a project in mind or want to discuss potential opportunities? Feel free to reach
+                                    out!</p>
+                                <div class="contact-detail">
+                                    <i class='bx bxs-phone'></i>
+                                    <div class="detail">
+                                        <p>Phone</p>
+                                        <p>+27 76 976 5576</p>
+                                    </div>
+                                </div>
+                                <div class="contact-detail">
+                                    <i class='bx bxs-envelope'></i>
+                                    <div class="detail">
+                                        <p>Email</p>
+                                        <p>Niashenh@gmail.com</p>
+                                    </div>
+                                </div>
+                                <div class="contact-detail">
+                                    <i class='bx bxs-map'></i>
+                                    <div class="detail">
+                                        <p>address</p>
+                                        <p>KwaZulu Natal, Durban</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="contact-box">
+                                <form id="contact-form">
+                                    <div class="field-box">
+                                        <h2 class="heading">Contact <span>Me!</span></h2>
+                                        <input type="text" id="from_name" name="from_name" placeholder="Your Name"
+                                            required>
+                                        <input type="email" id="from_email" name="from_email" placeholder="Your Email"
+                                            required>
+                                        <input type="text" id="phone" name="phone" placeholder="Phone number" required>
+                                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                                        <textarea id="message" name="message" placeholder="Your Message"
+                                            required></textarea>
+                                    </div>
+                                    <button type="submit" class="btne" id="submit-btn">
+                                        <span id="btn-text">Send Message</span>
+                                        <span id="btn-spinner" style="display:none">Sending…</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+
+
+
+                    <!-- Toast notification -->
+                    <div id="toast" class="toast" role="alert"></div>
+
+                    <!--custom js file link-->
+                    <script src="script.js"></script>
+
+
+</body>
+
+</html>
