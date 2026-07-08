@@ -16,6 +16,10 @@
     --main-color: #01f0f8;
     --white-color: #fff;
     --disabled-color: #aaa;
+    --facebook-color: #1877f2;
+    --instagram-color: #e4405f;
+    --whatsapp-color: #25d366;
+    --github-color: #6e5494;
 }
 
 html {
@@ -114,34 +118,46 @@ header {
     justify-content: center;
     align-items: center;
     gap: 5px;
-    width: 42px;
-    height: 42px;
-    background: rgba(1, 240, 248, 0.08);
-    border: 1.5px solid rgba(1, 240, 248, 0.3);
-    border-radius: 0.6rem;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, rgba(1, 240, 248, 0.16), rgba(1, 240, 248, 0.06));
+    border: 1px solid rgba(1, 240, 248, 0.28);
+    border-radius: 999px;
     cursor: pointer;
-    padding: 8px;
-    transition: all 0.4s ease;
+    padding: 10px;
+    transition: all 0.35s ease;
     position: relative;
     z-index: 201;
     flex-shrink: 0;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(8px);
+}
+
+#menu-icon::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border-radius: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    pointer-events: none;
 }
 
 #menu-icon:hover {
-    background: rgba(1, 240, 248, 0.15);
+    transform: translateY(-2px) scale(1.03);
+    background: linear-gradient(135deg, rgba(1, 240, 248, 0.24), rgba(1, 240, 248, 0.1));
     border-color: var(--main-color);
-    box-shadow: 0 0 18px rgba(1, 240, 248, 0.3);
+    box-shadow: 0 0 20px rgba(1, 240, 248, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 #menu-icon span {
     display: block;
-    width: 100%;
-    height: 2px;
-    background: var(--main-color);
-    border-radius: 2px;
+    width: 22px;
+    height: 2.5px;
+    background: linear-gradient(90deg, #fff 0%, var(--main-color) 100%);
+    border-radius: 999px;
     transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     transform-origin: center;
-    box-shadow: 0 0 6px rgba(1, 240, 248, 0.6);
+    box-shadow: 0 0 8px rgba(1, 240, 248, 0.35);
 }
 
 /* Burger → X animation */
@@ -159,9 +175,10 @@ header {
 }
 
 #menu-icon.active {
-    background: rgba(1, 240, 248, 0.2);
+    transform: rotate(180deg);
+    background: linear-gradient(135deg, rgba(1, 240, 248, 0.28), rgba(1, 240, 248, 0.12));
     border-color: var(--main-color);
-    box-shadow: 0 0 25px rgba(1, 240, 248, 0.4);
+    box-shadow: 0 0 28px rgba(1, 240, 248, 0.3);
 }
 
 /* ===== NAV OVERLAY ===== */
@@ -217,7 +234,18 @@ section.active {
     display: flex;
     align-items: center;
     gap: 5rem;
+    animation: fadeUp 0.9s ease both;
+}
 
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .home-detail h1 {
@@ -282,7 +310,18 @@ section.active {
 
 .btn {
     display: flex;
+    animation: slideIn 0.8s ease both;
+}
 
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .btne {
@@ -337,13 +376,67 @@ section.active {
     color: var(--white-color);
     font-size: 1.5rem;
     transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.socials a::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--main-color);
+    transform: scale(0.2);
+    opacity: 0;
+    transition: all 0.35s ease;
+    z-index: -1;
 }
 
 .socials a:hover {
-    background: var(--main-color);
     color: var(--white-color);
     box-shadow: 0 0 20px rgba(1, 240, 248, 0.8), inset 0 0 10px rgba(1, 240, 248, 0.3);
     transform: translateY(-3px) scale(1.1);
+}
+
+.socials a:hover::before {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.social-link.facebook:hover {
+    border-color: var(--facebook-color);
+    box-shadow: 0 0 20px rgba(24, 119, 242, 0.35);
+}
+
+.social-link.facebook:hover::before {
+    background: var(--facebook-color);
+}
+
+.social-link.instagram:hover {
+    border-color: var(--instagram-color);
+    box-shadow: 0 0 20px rgba(228, 64, 95, 0.35);
+}
+
+.social-link.instagram:hover::before {
+    background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af);
+}
+
+.social-link.whatsapp:hover {
+    border-color: var(--whatsapp-color);
+    box-shadow: 0 0 20px rgba(37, 211, 102, 0.35);
+}
+
+.social-link.whatsapp:hover::before {
+    background: var(--whatsapp-color);
+}
+
+.social-link.github:hover {
+    border-color: var(--github-color);
+    box-shadow: 0 0 20px rgba(110, 84, 148, 0.35);
+}
+
+.social-link.github:hover::before {
+    background: var(--github-color);
 }
 
 .home-img .img-box {
@@ -428,6 +521,26 @@ section.active {
     border: 1px solid rgba(1, 240, 248, 0.15);
     transition: all 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    animation: floatCard 0.8s ease both;
+}
+
+.services-container .services-box:nth-child(2n) {
+    animation-delay: 0.1s;
+}
+
+.services-container .services-box:nth-child(3n) {
+    animation-delay: 0.2s;
+}
+
+@keyframes floatCard {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .services-container .services-box:hover {
@@ -582,6 +695,12 @@ section.active {
     border: 1px solid rgba(1, 240, 248, 0.15);
     transition: all 0.4s ease;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.resume-list .resume-item:hover {
+    transform: translateY(-6px) scale(1.01);
+    border-color: rgba(1, 240, 248, 0.4);
+    box-shadow: 0 12px 24px rgba(1, 240, 248, 0.12);
 }
 
 .resume-list .resume-item:hover {
