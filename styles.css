@@ -1023,6 +1023,9 @@ section.active {
 
 .affiliate-card {
     width: 100%;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 2.5rem;
@@ -1037,10 +1040,16 @@ section.active {
     animation: floatCard 0.8s ease both;
 }
 
-.affiliate-card:hover {
+.affiliate-card:hover,
+.affiliate-card:focus-visible {
     border-color: var(--main-color);
     box-shadow: 0 15px 45px rgba(1, 240, 248, 0.25);
     transform: translateY(-6px);
+}
+
+.affiliate-card:focus-visible {
+    outline: .2rem solid var(--main-color);
+    outline-offset: .4rem;
 }
 
 .affiliate-badge {
@@ -1101,6 +1110,14 @@ section.active {
     align-items: center;
     gap: 0.6rem;
     margin-right: 0;
+}
+
+/* the whole card is the link, so the button reacts to hovering anywhere on it */
+.affiliate-card:hover .affiliate-btn,
+.affiliate-card:focus-visible .affiliate-btn {
+    color: var(--bg-color);
+    box-shadow: 0 8px 25px rgba(1, 240, 248, 0.4);
+    transform: translateY(-2px);
 }
 
 .affiliates-more {
