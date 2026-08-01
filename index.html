@@ -1,556 +1,829 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- lang="en-ZA" tells Google this page targets South African English,
+     which helps it rank on google.co.za rather than being treated as generic -->
+<html lang="en-ZA">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
-    <link rel="shortcut icon" href="images/favicon.svg" type="image/x-icon">
-    <title>Shaidon Hirjee | Web Developer, SEO Specialist & Designer in Durban, South Africa</title>
-    <meta name="description" content="Shaidon Hirjee is a web developer, SEO specialist, and graphic designer in Durban, South Africa. Build responsive websites, improve search visibility, and grow your business online.">
-    <meta name="keywords" content="Shaidon Hirjee, Shaidon, web developer Durban, SEO specialist South Africa, graphic designer Durban, responsive website design South Africa, web developer South Africa,web development Durban, SEO services South Africa, digital design Durban, web design South Africa, freelance web developer Durban, freelance SEO specialist South Africa, freelance graphic designer Durban, web development services South Africa, SEO optimization Durban, website design and development South Africa">
-    <meta name="robots" content="index, follow">
+
+    <!-- ===================================================
+         SEO — primary tags
+         The title and description are what actually show up in
+         Google, so both lead with the search terms people type:
+         "web developer Durban" / "website design South Africa".
+         =================================================== -->
+    <title>Web Design Durban | Shaidon Hirjee — Web Developer &amp; SEO Specialist, South Africa</title>
+    <meta name="description"
+        content="Shaidon Hirjee builds websites in Durban, South Africa. Web development, SEO, graphic design and motion graphics — responsive, fast websites that rank higher and convert more visitors. Free quote.">
+    <meta name="keywords"
+        content="web design Durban, website design Durban, websites Durban, web developer Durban, web development Durban, website designer Durban South Africa, affordable website design Durban, best web developer Durban, freelance web developer Durban, website design South Africa, web design South Africa, websites South Africa, web developer South Africa, SEO Durban, SEO specialist Durban, SEO services South Africa, SEO company Durban, graphic designer Durban, logo design Durban, branding Durban, motion graphics Durban, app developer Durban, ecommerce website Durban, business website South Africa, responsive website design South Africa, KwaZulu-Natal web design, Shaidon Hirjee, Shaidon, Niashen Hirjee">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="author" content="Shaidon Hirjee">
-    <meta name="theme-color" content="#201e1e">
-    <meta property="og:title" content="Shaidon Hirjee | Web Developer, SEO Specialist & Designer in Durban, South Africa">
-    <meta property="og:description" content="Shaidon Hirjee is a web developer, SEO specialist, and graphic designer in Durban, South Africa. Build responsive websites and improve search visibility for your business.">
+    <meta name="theme-color" content="#0b0d10">
+    <link rel="canonical" href="https://shaidon.co.za/">
+
+    <!-- local SEO — tells search engines exactly where this business trades -->
+    <meta name="geo.region" content="ZA-NL">
+    <meta name="geo.placename" content="Durban, KwaZulu-Natal, South Africa">
+    <meta name="geo.position" content="-29.858680;30.925360">
+    <meta name="ICBM" content="-29.858680, 30.925360">
+
+    <!-- social preview cards (Facebook, WhatsApp, LinkedIn) -->
+    <meta property="og:site_name" content="Shaidon Hirjee — Web Design Durban">
+    <meta property="og:title" content="Web Design Durban | Shaidon Hirjee — Web Developer &amp; SEO Specialist">
+    <meta property="og:description"
+        content="Websites built in Durban, South Africa — web development, SEO, graphic design and motion graphics. Explore the work in an interactive 3D portfolio.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="images/me.png">
+    <meta property="og:url" content="https://shaidon.co.za/">
+    <meta property="og:image" content="https://shaidon.co.za/images/me.png">
+    <meta property="og:image:alt" content="Shaidon Hirjee, web developer in Durban, South Africa">
+    <meta property="og:locale" content="en_ZA">
+
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Shaidon Hirjee | Web Developer, SEO Specialist & Designer in Durban, South Africa">
-    <meta name="twitter:description" content="Shaidon Hirjee is a web developer, SEO specialist, and graphic designer in Durban, South Africa.">
+    <meta name="twitter:title" content="Web Design Durban | Shaidon Hirjee — Web Developer &amp; SEO Specialist">
+    <meta name="twitter:description"
+        content="Websites built in Durban, South Africa — web development, SEO, graphic design and motion graphics.">
+    <meta name="twitter:image" content="https://shaidon.co.za/images/me.png">
+
+    <!-- Google Search Console ownership -->
     <meta name="google-site-verification" content="JtqZNjvLjfOQBMP9XiceSQBu9YXvyTWbNYg10q6j99s">
-    <meta name="google-site-verification" content="NlhW4Pd514wMb31ho7tIqGTChJysMOK74P5wjZBbwRM" >
-    <meta name="google-site-verification" content="PM4NVgh9t-DiShhLp9tpi2p1JvGqqX2Rnt-ku5gzj2E" >
+    <meta name="google-site-verification" content="NlhW4Pd514wMb31ho7tIqGTChJysMOK74P5wjZBbwRM">
+    <meta name="google-site-verification" content="PM4NVgh9t-DiShhLp9tpi2p1JvGqqX2Rnt-ku5gzj2E">
+
+    <!-- ===================================================
+         Structured data
+         Three linked blocks so Google can read the site as a real
+         local business rather than guessing:
+           Person             — who Shaidon is
+           ProfessionalService — the business, its area and services
+           WebSite            — the site itself
+         =================================================== -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Shaidon Hirjee",
-      "alternateName": "Shaidon",
-      "jobTitle": "Web Developer, SEO Specialist, Graphic Designer",
-      "description": "Shaidon Hirjee is a web developer, SEO specialist, and graphic designer based in Durban, South Africa.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Durban",
-        "addressRegion": "KwaZulu-Natal",
-        "addressCountry": "ZA"
-      },
-      "knowsAbout": [
-        "Web Development",
-        "SEO",
-        "Graphic Design",
-        "Responsive Website Design"
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://shaidon.co.za/#person",
+          "name": "Shaidon Hirjee",
+          "alternateName": ["Shaidon", "Niashen Hirjee"],
+          "jobTitle": "Web Developer, SEO Specialist, Graphic Designer",
+          "description": "Shaidon Hirjee is a web developer, SEO specialist and graphic designer based in Durban, South Africa.",
+          "url": "https://shaidon.co.za/",
+          "image": "https://shaidon.co.za/images/me.png",
+          "email": "niashenh@gmail.com",
+          "telephone": "+27769765576",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Durban",
+            "addressRegion": "KwaZulu-Natal",
+            "addressCountry": "ZA"
+          },
+          "knowsAbout": [
+            "Web Development",
+            "Website Design",
+            "Search Engine Optimisation",
+            "Graphic Design",
+            "Logo Design and Branding",
+            "Motion Graphics",
+            "App Development",
+            "Responsive Website Design"
+          ],
+          "sameAs": [
+            "https://www.facebook.com/shaidonh",
+            "https://www.instagram.com/shaidonhirjee/",
+            "https://github.com/shaidon2"
+          ]
+        },
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://shaidon.co.za/#business",
+          "name": "Shaidon Hirjee — Web Design Durban",
+          "description": "Website design, web development and SEO for businesses in Durban and across South Africa.",
+          "url": "https://shaidon.co.za/",
+          "image": "https://shaidon.co.za/images/me.png",
+          "founder": { "@id": "https://shaidon.co.za/#person" },
+          "priceRange": "$$",
+          "telephone": "+27769765576",
+          "email": "niashenh@gmail.com",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Shallcross",
+            "addressLocality": "Durban",
+            "addressRegion": "KwaZulu-Natal",
+            "postalCode": "4093",
+            "addressCountry": "ZA"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -29.858680,
+            "longitude": 30.925360
+          },
+          "areaServed": [
+            { "@type": "City", "name": "Durban" },
+            { "@type": "AdministrativeArea", "name": "KwaZulu-Natal" },
+            { "@type": "Country", "name": "South Africa" }
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Web and design services",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website Design and Development", "areaServed": "Durban, South Africa" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Search Engine Optimisation (SEO)", "areaServed": "South Africa" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Graphic Design", "areaServed": "Durban, South Africa" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Logo Design and Branding", "areaServed": "Durban, South Africa" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Motion Graphics and Video Editing", "areaServed": "South Africa" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mobile App Development", "areaServed": "South Africa" } }
+            ]
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://shaidon.co.za/#website",
+          "url": "https://shaidon.co.za/",
+          "name": "Shaidon Hirjee — Web Design Durban",
+          "inLanguage": "en-ZA",
+          "publisher": { "@id": "https://shaidon.co.za/#person" }
+        }
       ]
     }
     </script>
-    <!-- EmailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
- <script>
-  (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="pR-CDGke1fY6UwaUufy7g";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
- </script>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="world.css">
+
+    <!-- decide up front whether this device gets the full 3D world,
+         so the correct stylesheet branch is active on first paint -->
+    <script>
+        (function () {
+            var pref = null;
+            try { pref = localStorage.getItem('shaidon-mode'); } catch (e) { }
+
+            // ?mode=3d / ?mode=flat forces a mode and remembers it
+            var forced = (location.search.match(/[?&]mode=(3d|flat)/) || [])[1];
+            if (forced) {
+                pref = forced;
+                try { localStorage.setItem('shaidon-mode', forced); } catch (e) { }
+            }
+
+            var supports3d = (function () {
+                try {
+                    var c = document.createElement('canvas');
+                    return !!(window.WebGLRenderingContext &&
+                        (c.getContext('webgl') || c.getContext('experimental-webgl')));
+                } catch (e) { return false; }
+            })();
+
+            var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var roomy = window.innerWidth >= 1000 && window.innerHeight >= 560;
+            var wanted = pref ? pref === '3d' : (!reduced && roomy);
+
+            if (wanted && supports3d) document.documentElement.classList.add('mode-3d');
+            window.__can3d = supports3d;
+        })();
+    </script>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.180.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.180.0/examples/jsm/"
+        }
+    }
+    </script>
 </head>
 
 <body>
-    <canvas id="mouse-effect-canvas" class="mouse-effect-canvas"></canvas>
-    <header>
-        <a class="logo" href="index.html">Shaidon.</a>
 
-        <button class="burger" id="menu-icon" aria-label="Toggle navigation" aria-expanded="false">
-            <span></span>
-            <span></span>
-            <span></span>
+    <!-- ===== preloader ===== -->
+    <div id="preloader" aria-hidden="true">
+        <div class="loader-cube">
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+        </div>
+        <p class="loader-text">Building the world</p>
+    </div>
+
+    <!-- ===== header ===== -->
+    <header class="header">
+        <a href="#home" class="logo">Shaidon<span>.</span></a>
+
+        <button class="menu-icon" id="menu-icon" type="button" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span><span></span><span></span>
         </button>
 
         <nav class="navbar">
-            <a href="#home" class="active">home</a>
-            <a href="#services">services</a>
+            <a href="#home" class="active">Home</a>
+            <a href="#services">Services</a>
             <a href="#resume">Resume</a>
-            <a href="#portfolio">portfolio</a>
-            <a href="#affiliates">affiliates</a>
-            <a href="#contact">contact</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#affiliates">Affiliates</a>
+            <a href="#contact">Contact</a>
         </nav>
-
     </header>
 
-    <div id="nav-overlay"></div>
+    <div class="nav-overlay" id="nav-overlay"></div>
 
-    <!-- home section starts -->
+    <!-- ===== home ===== -->
     <section id="home" class="home active">
+        <div class="home-content">
+            <h3 class="eyebrow">Hello, I'm</h3>
+            <h1>I'M <span>SHAIDON</span></h1>
+            <h3 class="typing-line">I am a <span class="typed-text"
+                    data-words="Graphic Designer,Web Developer,Motion Designer,Brand Builder"></span><span
+                    class="caret"></span></h3>
+            <p>
+                Hi, I'm Niashen &mdash; a <strong>web developer and designer based in Durban, South Africa</strong>,
+                working in web development, SEO, graphic design and motion graphics. I build fast, responsive
+                <strong>websites</strong> that help South African businesses rank higher on Google, convert more
+                visitors and look sharp everywhere they show up. Whether it's collaborating with teams or
+                tackling solo projects, I'm always driven by clean code and creative thinking.
+            </p>
 
-
-        <div class="home-detail">
-            <h1>I'm Shaidon</h1>
-            <h2>I am a
-                <span style="--i:4;" data-text="Web Developer">Web Developer</span>
-                <span style="--i:3;" data-text="Graphic Designer">Graphic Designer</span>
-                <span style="--i:2;" data-text="Freelancer">Freelancer</span>
-                <span style="--i:1;" data-text="App developer">App Developer</span>
-            </h2>
-            <p>Hi I'm a passionate South African developer based in Durban, specialising in web development, SEO, and graphic design.<br>I build efficient, scalable websites and digital experiences that help South African businesses rank higher, convert visitors, and grow online. Whether it's collaborating with teams or tackling solo projects, I focus on clean code, fast performance, and strong search visibility.</p>
-
+            <!-- extra context for search engines: the same facts as above, phrased
+                 the way people actually search. Hidden visually, read by crawlers
+                 and screen readers. -->
             <div class="sr-only">
-                Shaidon Hirjee is a web developer, SEO specialist, and graphic designer in Durban, South Africa. Shaidon Hirjee helps businesses with web development, SEO, and digital design.
+                Shaidon Hirjee is a web developer, website designer, SEO specialist and graphic designer in
+                Durban, KwaZulu-Natal, South Africa. Services include website design and development in Durban,
+                affordable business websites, e-commerce websites, search engine optimisation for South African
+                companies, logo design, branding, motion graphics and mobile app development. Serving Durban,
+                Umhlanga, Pinetown, Westville, Chatsworth, Shallcross, Pietermaritzburg and clients across
+                KwaZulu-Natal and South Africa.
             </div>
 
-            <div class="btn">
-                <a href="#contact" class="btne">Hire Me</a>
-                <div class="socials">
-                    <a href=https://www.facebook.com/shaidonh class="social-link facebook" aria-label="Facebook"><i class='bx bxl-facebook'></i></a>
-                    <a href=https://www.instagram.com/shaidonhirjee/?hl=en class="social-link instagram" aria-label="Instagram"><i class='bx bxl-instagram'></i></a>
-                    <a href=https://wa.me/27769765576 class="social-link whatsapp" aria-label="WhatsApp"><i class='bx bxl-whatsapp'></i></a>
-                    <a href=https://github.com/shaidon2 class="social-link github" aria-label="GitHub"><i class='bx bxl-github'></i></a>
-                </div>
+            <div class="home-actions">
+                <a href="#contact" class="btn magnetic">Hire Me</a>
+                <a href="files/Curriculum%20Vitae%20of%20NH%20upd.docx" class="btn btn-ghost magnetic" download>
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 3v12M7.5 10.5L12 15l4.5-4.5M4 20h16" /></svg> Download CV
+                </a>
+            </div>
+
+            <!-- real profile URLs, matching the "sameAs" list in the structured
+                 data above — Google uses that agreement to confirm identity -->
+            <div class="social-media">
+                <a class="facebook" href="https://www.facebook.com/shaidonh" target="_blank" rel="noopener me" aria-label="Facebook"><svg class="icon" viewBox="0 0 24 24"><path d="M14 8.5V7a1.5 1.5 0 0 1 1.5-1.5H17V3h-2A4 4 0 0 0 11 7v1.5H9V11h2v10h3V11h2.2l.3-2.5H14z" /></svg></a>
+                <a class="instagram" href="https://www.instagram.com/shaidonhirjee/" target="_blank" rel="noopener me" aria-label="Instagram"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" /> <circle cx="12" cy="12" r="4" /> <circle cx="17.2" cy="6.8" r="1" /></svg></a>
+                <a class="whatsapp" href="https://wa.me/27769765576" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="icon" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.9 7L4 20l1.1-3.9A8 8 0 1 1 20 12z" /> <path d="M9 9.5c0 3 2.5 5.5 5.5 5.5.6 0 1-.5 1-1l-1.4-.8-1 .8a5 5 0 0 1-2.1-2.1l.8-1L10.5 9c-.6 0-1.5.1-1.5.5z" /></svg></a>
+                <a class="github" href="https://github.com/shaidon2" target="_blank" rel="noopener me" aria-label="GitHub"><svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-4 1.2-4-2.2-5.5-2.7M15 21v-3.4c0-1 .1-1.4-.5-2 2.3-.3 4.5-1.2 4.5-5a3.9 3.9 0 0 0-1-2.7 3.6 3.6 0 0 0-.1-2.7s-.9-.3-2.9 1a10 10 0 0 0-5 0C8 3.1 7.1 3.4 7.1 3.4a3.6 3.6 0 0 0-.1 2.7 3.9 3.9 0 0 0-1 2.7c0 3.8 2.2 4.7 4.5 5-.6.6-.6 1.2-.5 2V21" /></svg></a>
+                <a class="email" href="mailto:niashenh@gmail.com" aria-label="Email"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" /> <path d="M3.5 7l8.5 6 8.5-6" /></svg></a>
             </div>
         </div>
 
-        <div class="home-img">
+        <div class="home-img" data-tilt>
             <div class="img-box">
-                <div class="img-item">
-                    <img src="images/me.png" alt="Shaidon Hirjee — web developer in Durban, South Africa">
-
+                <span class="ring ring-1"></span>
+                <span class="ring ring-2"></span>
+                <span class="ring ring-3"></span>
+                <span class="orbit"><i></i></span>
+                <div class="img-shell">
+                    <img src="images/me.png"
+                        alt="Shaidon Hirjee — web developer and website designer in Durban, South Africa"
+                        width="520" height="620" fetchpriority="high">
                 </div>
             </div>
         </div>
     </section>
-    <!--home section ends-->
 
-        <!-- services section starts -->
-        <section id="services" class="services">
-            <h2 class="heading">my <span>Services</span></h2>
-            <div class="services-container">
+    <!-- ===== services ===== -->
+    <!-- each card is a real service, and each <h3> doubles as a keyword
+         heading — this is the section that ranks for "web design Durban" -->
+    <section id="services" class="services">
+        <h2 class="heading">My <span>Services</span></h2>
 
-                <div class="services-box">
-                    <div class="icons">
-                        <i class='bx bx-code-block'></i>
-                        <a href="#portfolio"><i class='bx bx-arrow-back'></i></a>
+        <p class="sr-only">
+            Web design, web development and SEO services offered in Durban, KwaZulu-Natal and throughout
+            South Africa.
+        </p>
+
+        <div class="services-container">
+            <div class="services-box">
+                <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M8.5 8L4 12l4.5 4M15.5 8l4.5 4-4.5 4M13.5 5l-3 14" /></svg>
+                <h3>Web Design &amp; Development</h3>
+                <p>Responsive, fast, hand-built <strong>websites in Durban, South Africa</strong> &mdash; from a
+                    one-page business site to a full interactive experience like this one.</p>
+            </div>
+
+            <div class="services-box">
+                <svg class="icon icon-lg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /> <path d="M16.5 16.5L21 21" /> <path d="M8 12l2.2 2.2L14.5 9" /></svg>
+                <h3>SEO &amp; Search Visibility</h3>
+                <p>On-page SEO, technical fixes, local search setup and Google Search Console &mdash; so South
+                    African customers actually find your business first.</p>
+            </div>
+
+            <div class="services-box">
+                <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0 0 18c1.3 0 2-.9 2-1.8 0-1.2-1-1.6-1-2.6 0-.8.7-1.6 1.7-1.6H16a5 5 0 0 0 5-5c0-3.9-4-7-9-7z" /> <circle cx="7.8" cy="12" r="1.1" /> <circle cx="9.8" cy="8.2" r="1.1" /> <circle cx="14.2" cy="7.6" r="1.1" /></svg>
+                <h3>Graphic Design</h3>
+                <p>Posters, flyers, thumbnails and print-ready artwork &mdash; <strong>graphic design in
+                        Durban</strong> that keeps a brand looking sharp everywhere it shows up.</p>
+            </div>
+
+            <div class="services-box">
+                <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M4 20c3.3 0 5-1.7 5-4a2.5 2.5 0 0 0-5 0c0 2-1 3-1 4z" /> <path d="M9.5 15.5L20 5a2 2 0 0 0-3-3L6.5 12.5" /></svg>
+                <h3>Logo &amp; Branding</h3>
+                <p>Mascot logos, wordmarks and full identity kits for South African businesses &mdash; colour,
+                    type and usage rules included.</p>
+            </div>
+
+            <div class="services-box">
+                <svg class="icon icon-lg" viewBox="0 0 24 24"><rect x="3" y="6" width="12" height="12" rx="2" /> <path d="M15 10.5l6-3.5v10l-6-3.5z" /></svg>
+                <h3>Motion Graphics</h3>
+                <p>Animated logo intros, stingers and short-form edits that give a channel or product a
+                    proper entrance.</p>
+            </div>
+
+            <div class="services-box">
+                <svg class="icon icon-lg" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5" /> <path d="M11 18.5h2" /></svg>
+                <h3>App Development</h3>
+                <p>Mobile-first builds with clean structure and sensible state &mdash; backed by full-stack
+                    training from the FNB App Academy.</p>
+            </div>
+
+            <div class="services-box">
+                <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M4 10v4a2 2 0 0 0 2 2h2l8 4V4L8 8H6a2 2 0 0 0-2 2z" /> <path d="M19 9.5a3.5 3.5 0 0 1 0 5" /></svg>
+                <h3>Social Media Ads</h3>
+                <p>Scroll-stopping ad creative and campaign assets sized for every feed, built to convert
+                    rather than just decorate.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== resume ===== -->
+    <section id="resume" class="resume">
+        <h2 class="heading">My <span>Resume</span></h2>
+
+        <div class="resume-container">
+            <div class="resume-nav">
+                <button class="resume-btn active" type="button">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 4L2 9l10 5 10-5-10-5z" /> <path d="M6 11.5V17c0 1.4 2.7 3 6 3s6-1.6 6-3v-5.5" /></svg> Education
+                </button>
+                <button class="resume-btn" type="button">
+                    <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2" /> <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 12.5h18" /></svg> Experience
+                </button>
+                <button class="resume-btn" type="button">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6z" /></svg> Skills
+                </button>
+                <button class="resume-btn" type="button">
+                    <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="9" r="6" /> <path d="M8.5 14.5L7 21l5-2.5L17 21l-1.5-6.5" /></svg> Certificates
+                </button>
+            </div>
+
+            <div class="resume-panels">
+                <!-- education -->
+                <div class="resume-detail active">
+                    <h3>Education</h3>
+                    <div class="resume-list">
+                        <div class="resume-item">
+                            <span class="year">Tertiary</span>
+                            <h4>BCom Business Management &amp; Marketing</h4>
+                            <p>Damelin College, Overport &mdash; 1st and 2nd year completed.</p>
+                        </div>
+                        <div class="resume-item">
+                            <span class="year">Grade 12</span>
+                            <h4>National Senior Certificate</h4>
+                            <p>Sutherland High School &amp; Shallcross Secondary School.</p>
+                        </div>
+                        <div class="resume-item">
+                            <span class="year">Subjects</span>
+                            <h4>Matric subject line-up</h4>
+                            <p>English Home Language, Afrikaans FAL, Business Studies, Computer Applications
+                                Technology, Economics, Mathematical Literacy, Life Orientation.</p>
+                        </div>
+                        <div class="resume-item">
+                            <span class="year">Objective</span>
+                            <h4>Career objective</h4>
+                            <p>To work in an organisation with a positive atmosphere that lets me be innovative
+                                and use my skills to prove my abilities &mdash; growing through continuous
+                                learning, commitment and problem solving.</p>
+                        </div>
                     </div>
-                    <h3>programming</h3>
-                    <p>Build custom web applications and automation scripts using JavaScript, Node.js, and modern
-                        frameworks for fast, scalable solutions.</p>
                 </div>
 
-                <div class="services-box">
-                    <div class="icons">
-                        <i class='bx bxs-paint'></i>
-                        <a href="#portfolio"><i class='bx bx-arrow-back'></i></a>
+                <!-- experience -->
+                <div class="resume-detail">
+                    <h3>Experience</h3>
+                    <div class="resume-list">
+                        <div class="resume-item">
+                            <span class="year">2022 &ndash; 2024</span>
+                            <h4>Broker &mdash; RSA Cartage</h4>
+                            <p>Managing loads, clients and rates across a national transport network.</p>
+                        </div>
+                        <div class="resume-item">
+                            <span class="year">2021</span>
+                            <h4>Merchandiser &mdash; FGKNIGHTS</h4>
+                            <p>Product presentation, stock rotation and in-store brand standards.</p>
+                        </div>
+                        <div class="resume-item">
+                            <span class="year">2020 &ndash; 2021</span>
+                            <h4>Freelance Graphic Designer &mdash; Self-employed</h4>
+                            <p>Logos, social media creative and brand collateral for a range of clients.</p>
+                        </div>
+                        <div class="resume-item">
+                            <span class="year">2019 &ndash; 2020</span>
+                            <h4>Broker / Sales Rep &mdash; The Art of More</h4>
+                            <p>New business development and account management.</p>
+                        </div>
+                        <div class="resume-item">
+                            <span class="year">2017</span>
+                            <h4>Data Capturing &mdash; Tidy Files</h4>
+                            <p>High-volume, high-accuracy capture on a temporary contract.</p>
+                        </div>
                     </div>
-                    <h3>UI/UX designer</h3>
-                    <p>Design clear, user-centered interfaces and experiences that improve usability and guide visitors
-                        through your product.</p>
                 </div>
 
-                <div class="services-box">
-                    <div class="icons">
-                        <i class='bx bx-code-alt'></i>
-                        <a href="#portfolio"><i class='bx bx-arrow-back'></i></a>
+                <!-- skills -->
+                <div class="resume-detail">
+                    <h3>Skills</h3>
+                    <div class="resume-list">
+
+                        <!-- real three.js geometry: extruded, bevelled, lit
+                             and spinning. skills.js drives this canvas. -->
+                        <div class="skills-3d">
+                            <canvas id="skills-canvas" aria-hidden="true"></canvas>
+                            <div class="skills-labels">
+                                <b>HTML5</b>
+                                <b>CSS3</b>
+                                <b>JavaScript</b>
+                                <b>Three.js</b>
+                                <b>Node.js</b>
+                                <b>Photoshop</b>
+                                <b>Illustrator</b>
+                                <b>After Effects</b>
+                            </div>
+                        </div>
+
+                        <div class="skill-row"><span>Graphic Design</span>
+                            <div class="bar"><i style="--lvl:92%"></i></div>
+                        </div>
+                        <div class="skill-row"><span>Logo &amp; Branding</span>
+                            <div class="bar"><i style="--lvl:88%"></i></div>
+                        </div>
+                        <div class="skill-row"><span>Web Development</span>
+                            <div class="bar"><i style="--lvl:80%"></i></div>
+                        </div>
+                        <div class="skill-row"><span>Motion / Video Editing</span>
+                            <div class="bar"><i style="--lvl:78%"></i></div>
+                        </div>
+                        <div class="skill-row"><span>App Development</span>
+                            <div class="bar"><i style="--lvl:70%"></i></div>
+                        </div>
+                        <div class="chip-row">
+                            <span class="chip">Creative thinking</span>
+                            <span class="chip">Works well under pressure</span>
+                            <span class="chip">Innovative ideas</span>
+                            <span class="chip">Driver's licence &mdash; Code B</span>
+                        </div>
                     </div>
-                    <h3>web development</h3>
-                    <p>Create responsive websites, landing pages, and web apps with HTML, CSS, JavaScript, and best-practice responsive design for South African businesses.</p>
                 </div>
 
-                <div class="services-box">
-                    <div class="icons">
-                        <i class='bx bxs-palette'></i>
-                        <a href="#portfolio"><i class='bx bx-arrow-back'></i></a>
+                <!-- certificates -->
+                <div class="resume-detail">
+                    <h3>Certificates</h3>
+                    <div class="resume-list">
+                        <div class="resume-item">
+                            <span class="year">Full stack</span>
+                            <h4>FNB App Academy &mdash; Full Stack Development</h4>
+                            <p>End-to-end application development certificate.</p>
+                        </div>
+                        <div class="resume-item">
+                            <span class="year">TEFL</span>
+                            <h4>TEFL 120-Hour English Certificate</h4>
+                            <p>Teaching English as a foreign language.</p>
+                        </div>
+                        <div class="resume-item">
+                            <span class="year">Matric</span>
+                            <h4>National Senior Certificate</h4>
+                            <p>Grade 12 matric certificate.</p>
+                        </div>
+                        <div class="resume-item">
+                            <span class="year">Also</span>
+                            <h4>12+ years computer literacy</h4>
+                            <p>Daily working knowledge of the full MS Office suite plus design and editing
+                                software.</p>
+                        </div>
                     </div>
-                    <h3>graphic design </h3>
-                    <p>Develop branding, logos, and marketing visuals using Adobe Creative Suite to give businesses a polished visual identity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== portfolio ===== -->
+    <section id="portfolio" class="portfolio">
+        <h2 class="heading">My <span>Portfolio</span></h2>
+
+        <p class="sr-only">
+            Recent website design, logo design and motion graphics work by Shaidon Hirjee, a web developer in
+            Durban, South Africa.
+        </p>
+
+        <div class="portfolio-container">
+            <div class="portfolio-box">
+
+                <div class="portfolio-info">
+                    <div class="portfolio-detail active">
+                        <span class="tag">Web Development</span>
+                        <h3>Portfolio Website</h3>
+                        <p>A hand-built personal site &mdash; responsive layout, animated hero and a working
+                            contact form wired straight to my inbox.</p>
+                        <span class="stack">HTML &middot; CSS &middot; JavaScript</span>
+                    </div>
+
+                    <div class="portfolio-detail">
+                        <span class="tag">Brand Identity</span>
+                        <h3>ShadyzCrazyGaming</h3>
+                        <p>Full mascot logo for a gaming channel &mdash; character illustration, claw marks and
+                            a badge lockup that reads at thumbnail size.</p>
+                        <span class="stack">Illustration &middot; Logo Design</span>
+                    </div>
+
+                    <div class="portfolio-detail">
+                        <span class="tag">Motion Graphics</span>
+                        <h3>Animated Logo Intro</h3>
+                        <p>A short broadcast-style logo sting designed to open videos with a bit of weight.</p>
+                        <span class="stack">Animation &middot; Sound</span>
+                    </div>
+
+                    <div class="portfolio-detail">
+                        <span class="tag">Motion Graphics</span>
+                        <h3>Dg4U Logo Animation</h3>
+                        <p>Client logo reveal with layered build-on and a clean settle into the final mark.</p>
+                        <span class="stack">Animation &middot; Branding</span>
+                    </div>
+
+                    <div class="portfolio-detail">
+                        <span class="tag">Brand Reveal</span>
+                        <h3>Skullerize</h3>
+                        <p>An edgier animated identity piece &mdash; heavier motion, grit and a hard cut to the
+                            logo.</p>
+                        <span class="stack">Animation &middot; Design</span>
+                    </div>
+
+                    <div class="portfolio-detail">
+                        <span class="tag">Advertising</span>
+                        <h3>Social Media Ad</h3>
+                        <p>Short-form ad creative built for the feed &mdash; hook in the first second, message
+                            in the next five.</p>
+                        <span class="stack">Video &middot; Campaign</span>
+                    </div>
+
+                    <div class="navigation">
+                        <button class="arrow-left disabled" type="button" aria-label="Previous project">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+                        </button>
+                        <button class="arrow-right" type="button" aria-label="Next project">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" /></svg>
+                        </button>
+                    </div>
                 </div>
 
-                <div class="services-box">
-                    <div class="icons">
-                        <i class='bx bx-trending-up'></i>
-                        <a href="#portfolio"><i class='bx bx-arrow-back'></i></a>
-                    </div>
-                    <h3>SEO</h3>
-                    <p>Optimize website structure, content, and performance to improve search visibility for South African brands and help more customers find you online.</p>
-                </div>
+                <!-- shown only when the browser refused to start a clip with
+                     sound; clicking it is a direct gesture, which always
+                     unmutes. script.js decides when to reveal it. -->
+                <button type="button" class="sound-badge" id="sound-badge" hidden>
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M4 10v4a2 2 0 0 0 2 2h2l8 4V4L8 8H6a2 2 0 0 0-2 2z" /> <path d="M17 9.5a3.5 3.5 0 0 1 0 5" /> <path d="M19.5 7a7 7 0 0 1 0 10" /></svg>
+                    Tap for sound
+                </button>
 
-                <div class="services-box">
-                    <div class="icons">
-                        <i class='bx bx-slideshow'></i>
-                        <a href="#portfolio"><i class='bx bx-arrow-back'></i></a>
+                <div class="portfolio-carousel">
+                    <div class="img-slide">
+                        <div class="img-item">
+                            <img src="images/website.png" loading="lazy"
+                                alt="Responsive portfolio website designed and built in Durban, South Africa">
+                        </div>
+                        <div class="img-item">
+                            <img src="images/Gamer logo.png" loading="lazy"
+                                alt="ShadyzCrazyGaming mascot logo design by a Durban graphic designer">
+                        </div>
+                        <div class="img-item">
+                            <video src="images/logo intro T.mp4" playsinline controls preload="metadata"></video>
+                        </div>
+                        <div class="img-item">
+                            <video src="images/logo intri Dg4U.mp4" playsinline controls preload="metadata"></video>
+                        </div>
+                        <div class="img-item">
+                            <video src="images/skullerize.mp4" playsinline controls preload="metadata"></video>
+                        </div>
+                        <div class="img-item">
+                            <video src="images/social media ad.mp4" playsinline controls preload="metadata"></video>
+                        </div>
                     </div>
-                    <h3>video editing </h3>
-                    <p>Produce polished videos and motion assets for social media, ads, and promotional campaigns with
-                        professional editing techniques.</p>
                 </div>
 
             </div>
+        </div>
+    </section>
 
-        </section>
-        <!--services section ends-->
+    <!-- ===== affiliates ===== -->
+    <section id="affiliates" class="affiliates">
+        <h2 class="heading">My <span>Affiliate</span></h2>
 
-            <!-- resume section starts -->
-            <section id="resume" class="resume">
-                <div class="resume-container">
-                    <div class="resume-box">
-                        <h2>Why hire me?</h2>
-                        <p class="desc">I deliver polished digital products through a strong blend of technical skill,
-                            creative design, and dependable communication. My work is focused on clean, maintainable
-                            solutions that help brands stand out online.</p>
-                        <button class="resume-btn active">Experience</button>
-                        <button class="resume-btn">Education</button>
-                        <button class="resume-btn">Skills</button>
-                        <button class="resume-btn">About me</button>
+        <div class="affiliates-container">
+            <a class="affiliate-card featured" href="https://panel.hostafrica.com/?aff=3470" target="_blank"
+                rel="noopener sponsored" data-tilt>
+                <div class="affiliate-logo">
+                    <img src="images/ha-logo-large.png" loading="lazy"
+                        alt="HOSTAFRICA — South African web hosting provider">
+                </div>
+
+                <div class="affiliate-body">
+                    <span class="tag">Hosting Partner</span>
+                    <h3>HOSTAFRICA</h3>
+                    <p>The host I put my own work on. Local South African servers, fast NVMe hosting,
+                        domains and free SSL &mdash; with support that actually answers.</p>
+
+                    <ul class="affiliate-points">
+                        <li>Shared, reseller and VPS hosting</li>
+                        <li>Domains, SSL and email included</li>
+                        <li>SA-based servers and support</li>
+                    </ul>
+
+                    <span class="btn">
+                        Get hosting
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M14 11a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1-1" /> <path d="M10 13a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1 1" /></svg>
+                    </span>
+                </div>
+            </a>
+        </div>
+
+        <p class="affiliates-note">
+            Signing up through this link supports my work at no extra cost to you.
+        </p>
+    </section>
+
+    <!-- ===== contact ===== -->
+    <section id="contact" class="contact">
+        <h2 class="heading">Contact <span>Me</span></h2>
+
+        <div class="contact-container">
+            <div class="contact-info">
+                <a class="info-row" href="mailto:niashenh@gmail.com">
+                    <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" /> <path d="M3.5 7l8.5 6 8.5-6" /></svg>
+                    <span><b>Email</b>niashenh@gmail.com</span>
+                </a>
+                <a class="info-row" href="tel:+27769765576">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M6 3h3l1.5 4.5-2 1.5a12 12 0 0 0 6.5 6.5l1.5-2L21 15v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4 5.2 2 2 0 0 1 6 3z" /></svg>
+                    <span><b>Phone</b>076 976 5576</span>
+                </a>
+                <div class="info-row">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z" /> <circle cx="12" cy="10" r="2.6" /></svg>
+                    <span><b>Based in</b>Shallcross, Durban &mdash; South Africa</span>
+                </div>
+                <div class="info-row">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6z" /></svg>
+                    <span><b>Available for</b>Freelance &amp; full-time work</span>
+                </div>
+            </div>
+
+            <form id="contact-form" class="contact-form">
+                <!-- field names must match the EmailJS template variables
+                     (from_name / from_email / phone / subject / message) -->
+                <div class="field-row">
+                    <div class="field">
+                        <input type="text" name="from_name" id="from_name" placeholder=" " required>
+                        <label for="from_name">Full name</label>
                     </div>
-                    <div class="resume-box">
-                        <div class="resume-detail Experience active">
-                            <h2 class="heading">My <span>Experience</span></h2>
-                            <p class="desc">View and download my professional CV to see the full details of my
-                                experience, skills, and achievements.</p>
-                            <div class="resume-list resume-download-list">
-                                <div class="resume-item resume-download-item">
-                                    <a href="files/Curriculum Vitae of NH upd.docx" download
-                                        class="btne download-cv-btn">Download CV</a>
-                                    <p class="desc resume-download-desc">Get a polished copy of my CV with full work
-                                        history, education, and core strengths.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="resume-detail Education">
-                            <h2 class="heading">My <span>Education</span></h2>
-                            <p class="desc">Formal training in web development and digital design, supported by real
-                                client work and continuous learning of new tools.</p>
-                            <div class="resume-list">
-                                <div class="resume-item">
-                                    <p class="year">2002 - 2009</p>
-                                    <h3>Springvale Primary</h3>
-                                    <p class="company">Primary School</p>
-                                    <p>Completed primary education at Springvale Primary School with a strong foundation
-                                        in literacy, numeracy, and basic computing.</p>
-                                </div>
-                                <div class="resume-item">
-                                    <p class="year">2010 - 2013</p>
-                                    <h3>Sutherland High School</h3>
-                                    <p class="company">High School</p>
-                                    <p>Attended Sutherland High School and completed secondary education with studies in
-                                        science, mathematics, and languages.</p>
-                                </div>
-                                <div class="resume-item">
-                                    <p class="year">2014 - 2016</p>
-                                    <h3>Damelin College</h3>
-                                    <p class="company">BCom Marketing and Business Management</p>
-                                    <p>Studied BCom Marketing and Business Management at Damelin College, gaining strong
-                                        business strategy, marketing, and management skills.</p>
-                                </div>
-                                <div class="resume-item">
-                                    <p class="year">2021</p>
-                                    <h3>TEFL Certificate</h3>
-                                    <p class="company">English Language Training</p>
-                                    <p>Earned a TEFL certificate and developed skills in teaching English as a foreign
-                                        language.</p>
-                                </div>
-                                <div class="resume-item">
-                                    <p class="year">2025</p>
-                                    <h3>Full Stack Development Certificate</h3>
-                                    <p class="company">FNB App Academy</p>
-                                    <p>Completed full stack development training focused on web applications, backend
-                                        systems, and modern development workflows.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="resume-detail Skills">
-                            <h2 class="heading">My <span>Skills</span></h2>
-                            <p class="desc">A versatile skill set focused on front-end development, design systems, and
-                                tools that create smooth, modern digital experiences.</p>
-                            <div class="resume-list">
-                                <div class="resume-item">
-                                    <i class='bx bxl-html5'></i>
-                                    <span>HTML5</span>
-                                </div>
-                                <div class="resume-item">
-                                    <i class='bx bxl-css3'></i>
-                                    <span>CSS3</span>
-                                </div>
-                                <div class="resume-item">
-                                    <i class='bx bxl-javascript'></i>
-                                    <span>JavaScript</span>
-                                </div>
-                                <div class="resume-item">
-                                    <i class='bx bxl-adobe'></i>
-                                    <span>Adobe</span>
-                                </div>
-                                <div class="resume-item">
-                                    <i class='bx bxl-tailwind-css'></i>
-                                    <span>Tailwind CSS</span>
-                                </div>
-                                <div class="resume-item">
-                                    <i class='bx bx-palette'></i>
-                                    <span>Figma</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="resume-detail About">
-                            <h2 class="heading">About <span>me</span></h2>
-                            <p class="desc">I am a creative technical professional who combines web development, graphic
-                                design, and video production to bring strong ideas to life. I enjoy taking on new
-                                challenges, collaborating with clients, and building memorable digital experiences.</p>
-                            <div class="resume-list">
-                                <div class="resume-item">
-                                    <p>Name: <span>Shaidon Hirjee</span></p>
-                                </div>
-                                <div class="resume-item">
-                                    <p>Age: <span>30</span></p>
-                                </div>
-                                <div class="resume-item">
-                                    <p>Gender: <span>Male</span></p>
-                                </div>
-                                <div class="resume-item">
-                                    <p>Status: <span>Single</span></p>
-                                </div>
-                                <div class="resume-item">
-                                    <p>City: <span>Durban</span></p>
-                                </div>
-                                <div class="resume-item">
-                                    <p>Nationanlity: <span>South African</span></p>
-                                </div>
-                                <div class="resume-item">
-                                    <p>Experience: <span>8+ Years</span></p>
-                                </div>
-                                <div class="resume-item">
-                                    <p>Full time: <span>Available</span></p>
-                                </div>
-                                <div class="resume-item">
-                                    <p>Freelance: <span>Available</span></p>
-                                </div>
-                                <div class="resume-item">
-                                    <p>Mobile NO.<span>(+27) 769765576</span></p>
-                                </div>
-                                <div class="resume-item">
-                                    <p>Email: <span>Niashenh@gmail.com</span></p>
-                                </div>
-                                <div class="resume-item">
-                                    <p>Languages: <span>English</span></p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="field">
+                        <input type="email" name="from_email" id="from_email" placeholder=" " required>
+                        <label for="from_email">Email address</label>
                     </div>
                 </div>
-            </section>
-            <!--resume section ends-->
 
-                <!-- portfolio section starts -->
-                <section id="portfolio" class="portfolio">
-                    <h2 class="heading">Latest <span>Projects</span></h2>
-                    <div class="portfolio-container">
-                        <div class="portfolio-box">
-                            <div class="portfolio-detail active">
-                                <p class="numb">01</p>
-                                <h3>Brand identity</h3>
-                                <p>Created a bold visual identity for a gaming brand, including a custom logo and matching
-                                    social graphics that make the channel feel polished and memorable.</p>
-                                <div class="tech">
-                                    <p>Adobe Illustrator</p>
-                                </div>
-                                <div class="live-github">
-                                    <a href="#portfolio"><i class='bx bx-arrow-back'></i><span>Live project</span></a>
-                                    <a href="#portfolio"><i class='bx bxl-adobe'></i><span>Adobe</span></a>
-                                </div>
-                            </div>
-
-                            <div class="portfolio-detail">
-                                <p class="numb">02</p>
-                                <h3>Logo Intro Animation</h3>
-                                <p>Designed a polished logo intro animation that gives the brand a cinematic opening and a
-                                    professional motion identity.</p>
-                                <div class="tech">
-                                    <p>After Effects</p>
-                                </div>
-                                <div class="live-github">
-                                    <a href="#portfolio"><i class='bx bx-arrow-back'></i><span>Live project</span></a>
-                                    <a href="#portfolio"><i class='bx bxl-adobe'></i><span>Adobe</span></a>
-                                </div>
-                            </div>
-
-                            <div class="portfolio-detail">
-                                <p class="numb">03</p>
-                                <h3>Portfolio Website</h3>
-                                <p>Built a responsive portfolio website with a modern layout, smooth interactions, and a
-                                    polished presentation that highlights my work in a professional way.</p>
-                                <div class="tech">
-                                    <p>HTML / CSS / JS</p>
-                                </div>
-                                <div class="live-github">
-                                    <a href="#portfolio"><i class='bx bx-arrow-back'></i><span>Live project</span></a>
-                                    <a href="#portfolio"><i class='bx bxl-github'></i><span>Code</span></a>
-                                </div>
-                            </div>
-
-                            <div class="portfolio-detail">
-                                <p class="numb">04</p>
-                                <h3>Social Media Ad</h3>
-                                <p>Created a social media advertisement for Drip Fever focused on grabbing attention,
-                                    highlighting the brand vibe, and boosting online engagement.</p>
-                                <div class="tech">
-                                    <p>Premiere Pro</p>
-                                </div>
-                                <div class="live-github">
-                                    <a href="#portfolio"><i class='bx bx-arrow-back'></i><span>Live project</span></a>
-                                    <a href="#portfolio"><i class='bx bxl-adobe'></i><span>Adobe</span></a>
-                                </div>
-                            </div>
-
-                            <div class="portfolio-detail">
-                                <p class="numb">05</p>
-                                <h3>Logo Intro animation</h3>
-                                <p>Designed a clean logo intro animation for Skulerize with smooth motion and a polished
-                                    brand presentation.</p>
-                                <div class="tech">
-                                    <p>After Effects</p>
-                                </div>
-                                <div class="live-github">
-                                    <a href="#portfolio"><i class='bx bx-arrow-back'></i><span>Live project</span></a>
-                                    <a href="#portfolio"><i class='bx bxl-adobe'></i><span>Adobe</span></a>
-                                </div>
-                            </div>
-
-                            <div class="portfolio-detail">
-                                <p class="numb">06</p>
-                                <h3>Logo Intro animation</h3>
-                                <p>Created a branded logo intro animation for Traces Sweet Connections that gives the brand a
-                                    warm, professional opening.</p>
-                                <div class="tech">
-                                    <p>After Effects</p>
-                                </div>
-                                <div class="live-github">
-                                    <a href="#portfolio"><i class='bx bx-arrow-back'></i><span>Live project</span></a>
-                                    <a href="#portfolio"><i class='bx bxl-adobe'></i><span>Adobe</span></a>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="portfolio-box">
-                            <div class="portfolio-carousel">
-                                <div class="img-slide">
-                                    <div class="img-item">
-                                        <img src="images/Gamer logo.png">
-                                    </div>
-                                    <div class="img-item">
-                                        <video src="images/logo intri Dg4U.mp4" controls playsinline loop></video>
-                                    </div>
-                                    <div class="img-item website-preview">
-                                        <img src="images/website.png" alt="Portfolio website preview">
-                                    </div>
-                                    <div class="img-item">
-                                        <video src="images/social media ad.mp4" controls playsinline loop></video>
-                                    </div>
-                                    <div class="img-item">
-                                        <video src="images/skullerize.mp4" controls playsinline loop></video>
-                                    </div>
-                                    <div class="img-item">
-                                           <video src="images/logo intro T.mp4" controls playsinline loop></video>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="navigation">
-                                <button class="arrow-left disabled"><i class='bx bx-chevron-left'></i></button>
-                                <button class="arrow-right"><i class='bx bx-chevron-right'></i></button>
-                            </div>
-                        </div>
-
+                <div class="field-row">
+                    <div class="field">
+                        <input type="tel" name="phone" id="phone" placeholder=" " required>
+                        <label for="phone">Phone number</label>
                     </div>
-                </section>
-                <!-- portfolio section ends-->
+                    <div class="field">
+                        <input type="text" name="subject" id="subject" placeholder=" " required>
+                        <label for="subject">Subject</label>
+                    </div>
+                </div>
 
-                    <!-- affiliates section starts -->
-                    <section id="affiliates" class="affiliates">
-                        <h2 class="heading">my <span>Affiliates</span></h2>
-                        <div class="affiliates-container">
+                <div class="field">
+                    <textarea name="message" id="message" rows="5" placeholder=" " maxlength="1200"
+                        required></textarea>
+                    <label for="message">Your message</label>
+                </div>
 
-                            <a href="https://panel.hostafrica.com/?aff=3470" target="_blank" rel="noopener noreferrer" class="affiliate-card" aria-label="Visit HostAfrica">
-                                <div class="affiliate-badge">
-                                    <img src="images/ha-logo-large.png" alt="HostAfrica logo">
-                                </div>
-                                <div class="affiliate-info">
-                                    <span class="tag">Trusted Partner</span>
-                                    <h3>HostAfrica</h3>
-                                    <p>Reliable South African web hosting with fast local servers, cPanel, and solid support for WordPress and business websites.</p>
-                                    <span class="btne affiliate-btn">Visit HostAfrica <i class='bx bx-link-external'></i></span>
-                                </div>
-                            </a>
+                <!-- live character count, filled in by script.js -->
+                <div class="field-foot" id="message-count" aria-live="polite">0 / 1200</div>
 
-                            <div class="affiliates-more">
-                                <span class="affiliates-more-dot"></span>
-                                <span class="affiliates-more-dot"></span>
-                                <span class="affiliates-more-dot"></span>
-                                <p>More trusted partners coming soon</p>
-                            </div>
+                <button type="submit" class="btn magnetic" id="submit-btn">
+                    <span id="btn-text">Send Message</span>
+                    <span id="btn-spinner" class="spinner" style="display:none"></span>
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M21 3L3 10.5l7 3 3 7L21 3z" /> <path d="M10 13.5L21 3" /></svg>
+                </button>
+            </form>
+        </div>
+    </section>
 
-                        </div>
-                    </section>
-                    <!-- affiliates section ends-->
+    <!-- ===== chrome ===== -->
+    <canvas id="mouse-effect-canvas" class="mouse-effect-canvas"></canvas>
+    <div id="toast" class="toast"></div>
 
-                    <!-- contact section starts -->
-                    <section id="contact" class="contact">
-                        <div class="contact-container">
-                            <div class="contact-box">
-                                <h2> Lets work together</h2>
-                                <p>Have a project in mind or want to discuss potential opportunities? Feel free to reach
-                                    out!</p>
-                                <div class="contact-detail">
-                                    <i class='bx bxs-phone'></i>
-                                    <div class="detail">
-                                        <p>Phone</p>
-                                        <p>+27 76 976 5576</p>
-                                    </div>
-                                </div>
-                                <div class="contact-detail">
-                                    <i class='bx bxs-envelope'></i>
-                                    <div class="detail">
-                                        <p>Email</p>
-                                        <p>Niashenh@gmail.com</p>
-                                    </div>
-                                </div>
-                                <div class="contact-detail">
-                                    <i class='bx bxs-map'></i>
-                                    <div class="detail">
-                                        <p>address</p>
-                                        <p>KwaZulu Natal, Durban</p>
-                                    </div>
-                                </div>
-                            </div>
+    <button class="mode-toggle" id="mode-toggle" type="button" aria-pressed="false">
+        <span class="dot"></span><span class="mode-label">3D Mode</span>
+    </button>
 
-                            <div class="contact-box">
-                                <form id="contact-form">
-                                    <div class="field-box">
-                                        <h2 class="heading">Contact <span>Me!</span></h2>
-                                        <input type="text" id="from_name" name="from_name" placeholder="Your Name"
-                                            required>
-                                        <input type="email" id="from_email" name="from_email" placeholder="Your Email"
-                                            required>
-                                        <input type="text" id="phone" name="phone" placeholder="Phone number" required>
-                                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
-                                        <textarea id="message" name="message" placeholder="Your Message"
-                                            required></textarea>
-                                    </div>
-                                    <button type="submit" class="btne" id="submit-btn">
-                                        <span id="btn-text">Send Message</span>
-                                        <span id="btn-spinner" style="display:none">Sending…</span>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </section>
+    <!-- ===== feature 1: accent picker =====
+         recolours the entire site, including the 3D world, from a single
+         CSS custom property. The choice is remembered. -->
+    <div class="accent-picker" id="accent-picker" role="group" aria-label="Accent colour">
+        <!-- on a phone the swatches collapse behind this trigger and slide
+             out sideways, so they never sit on top of the content -->
+        <button type="button" class="accent-trigger" id="accent-trigger" aria-expanded="false"
+            aria-controls="accent-swatches" aria-label="Choose accent colour"></button>
 
+        <div class="accent-swatches" id="accent-swatches">
+            <button type="button" data-accent="#01f0f8" style="--swatch:#01f0f8" aria-label="Cyan"></button>
+            <button type="button" data-accent="#b14aff" style="--swatch:#b14aff" aria-label="Violet"></button>
+            <button type="button" data-accent="#ff3d81" style="--swatch:#ff3d81" aria-label="Pink"></button>
+            <button type="button" data-accent="#3dff8f" style="--swatch:#3dff8f" aria-label="Green"></button>
+            <button type="button" data-accent="#ffb300" style="--swatch:#ffb300" aria-label="Amber"></button>
+        </div>
+    </div>
 
+    <!-- ===== feature 2: command palette =====
+         Ctrl/Cmd + K anywhere, or "/" — type to jump to a section or fire
+         an action without touching the mouse. -->
+    <div class="palette" id="palette" hidden>
+        <div class="palette-box" role="dialog" aria-modal="true" aria-label="Quick jump">
+            <div class="palette-head">
+                <svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /> <path d="M16.5 16.5L21 21" /></svg>
+                <input type="text" id="palette-input" placeholder="Jump to a section, or type what you need…"
+                    autocomplete="off" spellcheck="false">
+                <kbd>esc</kbd>
+            </div>
+            <ul class="palette-list" id="palette-list"></ul>
+        </div>
+    </div>
 
-                    <!-- Toast notification -->
-                    <div id="toast" class="toast" role="alert"></div>
+    <!-- ===== feature 3: project lightbox =====
+         click any portfolio piece to see it full size, uncropped, with
+         sound and arrow-key navigation. -->
+    <div class="lightbox" id="lightbox" hidden>
+        <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Close">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></svg>
+        </button>
+        <button class="lightbox-nav prev" id="lightbox-prev" type="button" aria-label="Previous">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+        </button>
+        <figure class="lightbox-stage" id="lightbox-stage"></figure>
+        <button class="lightbox-nav next" id="lightbox-next" type="button" aria-label="Next">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" /></svg>
+        </button>
+        <figcaption class="lightbox-caption" id="lightbox-caption"></figcaption>
+    </div>
 
-                    <!--custom js file link-->
-                    <script src="script.js"></script>
+    <!-- two versions of the hint: CSS shows whichever matches the input
+         device, since a phone has no wheel or arrow keys -->
+    <div class="hint" id="hint">
+        <span class="hint-pointer">Scroll, drag or use <kbd>&larr;</kbd> <kbd>&rarr;</kbd> to fly between
+            sections</span>
+        <span class="hint-touch">Swipe left or right to fly between sections</span>
+    </div>
 
+    <!-- ===================================================
+         Scripts
+           email.min.js — EmailJS SDK, powers the contact form
+           script.js    — all site behaviour, both modes
+           skills.js    — three.js skill logos, both modes
+           world.js     — the 3D world, injected below only when needed
+         =================================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="script.js" defer></script>
 
+    <!-- hide the canvas if three.js fails to load, rather than leaving a gap -->
+    <script type="module" src="skills.js"
+        onerror="document.getElementById('skills-canvas').style.display='none'"></script>
+
+    <script>
+        // world.js is ~34 KB plus the three.js download, so it is only fetched
+        // for visitors who are actually getting the 3D world. Flat-mode and
+        // mobile visitors never pay for it — which keeps the page fast, and
+        // page speed is a ranking factor.
+        window.addEventListener('load', function () {
+            document.documentElement.classList.add('loaded');
+
+            if (!document.documentElement.classList.contains('mode-3d')) return;
+
+            var s = document.createElement('script');
+            s.type = 'module';
+            s.src = 'world.js';
+            s.onerror = function () {
+                // no three.js (offline?) — drop back to the flat site rather than a blank screen
+                document.documentElement.classList.remove('mode-3d');
+            };
+            document.body.appendChild(s);
+        });
+    </script>
 </body>
 
 </html>

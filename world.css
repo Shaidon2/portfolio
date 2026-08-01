@@ -1,0 +1,661 @@
+/* ===================================================
+   3D WORLD MODE
+   Everything here is scoped to body.mode-3d, so the
+   flat site is completely untouched when 3D is off.
+   =================================================== */
+
+/* mode toggle pill - visible in both modes */
+.mode-toggle {
+    position: fixed;
+    left: 1.5rem;
+    bottom: 1.5rem;
+    z-index: 300;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .55rem 1.1rem;
+    font-size: .85rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--white-color);
+    background: rgba(32, 30, 30, 0.82);
+    border: 1px solid rgb(var(--main-rgb) / 0.28);
+    border-radius: 2rem;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    transition: all .35s ease;
+}
+
+.mode-toggle:hover {
+    color: var(--main-color);
+    border-color: var(--main-color);
+    box-shadow: 0 6px 22px rgb(var(--main-rgb) / 0.18);
+}
+
+.mode-toggle .dot {
+    width: .5rem;
+    height: .5rem;
+    border-radius: 50%;
+    background: var(--disabled-color);
+    transition: all .35s ease;
+}
+
+.mode-3d .mode-toggle .dot {
+    background: var(--main-color);
+    box-shadow: 0 0 10px var(--main-color);
+}
+
+/* --- page shell --- */
+.mode-3d,
+.mode-3d body {
+    height: 100%;
+    overflow: hidden;
+    /* stops a sideways swipe from triggering the browser's back/forward
+       gesture — in 3D a horizontal swipe means "fly to the next section",
+       and without this a swipe near the screen edge leaves the site.
+       pan-y is the part that actually does it: it hands vertical panning
+       to the browser (so panel content still scrolls) and reserves the
+       horizontal axis for us. overscroll-behavior alone is not enough,
+       because with overflow:hidden there is nothing to overscroll. */
+    overscroll-behavior: none;
+    touch-action: pan-y;
+}
+
+/* the panels sit in their own layer, so they need it too */
+.mode-3d section,
+.mode-3d #world-css,
+.mode-3d #world-gl {
+    touch-action: pan-y;
+}
+
+.mode-3d {
+    background: #16181c;
+}
+
+.mode-3d body {
+    background: transparent;
+}
+
+/* the old 2d mouse trail is replaced by the webgl dust field */
+.mode-3d .mouse-effect-canvas {
+    display: none;
+}
+
+/* --- renderer layers --- */
+#world-gl {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+#world-css {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+}
+
+/* foreground haze so panels sit inside the atmosphere, not on top of it */
+#world-haze {
+    position: fixed;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 50% 42%, rgb(var(--main-rgb) / 0.035), transparent 60%),
+        radial-gradient(ellipse at 50% 50%, transparent 62%, rgba(10, 12, 14, 0.5) 100%);
+}
+
+/* --- station rail --- */
+#world-rail {
+    position: fixed;
+    right: 2.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 300;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+#world-rail button {
+    position: relative;
+    width: .7rem;
+    height: .7rem;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    transition: all .4s ease;
+}
+
+#world-rail button:hover {
+    border-color: var(--main-color);
+    transform: scale(1.35);
+}
+
+#world-rail button.active {
+    background: var(--main-color);
+    border-color: var(--main-color);
+    box-shadow: 0 0 12px rgb(var(--main-rgb) / 0.7);
+}
+
+#world-rail button span {
+    position: absolute;
+    right: 1.6rem;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    font-size: .72rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--white-color);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease;
+}
+
+#world-rail button:hover span {
+    opacity: .75;
+}
+
+/* --- panels --- */
+.mode-3d section {
+    position: absolute;
+    width: var(--pw);
+    height: var(--ph);
+    padding: 3rem 3.2rem;
+    visibility: visible;
+    opacity: 1;
+    /* MUST stay visible. Any clipping (overflow hidden/clip, clip-path) on a
+       CSS3DObject element kills hit-testing for every panel that is not sitting
+       at the 3D context origin - which left #home clickable and nothing else.
+       Clipping on elements *inside* the panel is fine. */
+    overflow: visible;
+    transition: none;
+    border-radius: 1.4rem;
+    border: 1px solid rgb(var(--main-rgb) / 0.16);
+    background:
+        linear-gradient(160deg, rgba(44, 42, 42, 0.9), rgba(22, 21, 21, 0.93));
+    box-shadow:
+        0 40px 90px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+    animation: none;
+}
+
+/* thin light edge along the top of each panel */
+.mode-3d section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 12%;
+    width: 76%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgb(var(--main-rgb) / 0.55), transparent);
+}
+
+/* panels are deliberately wider than 16:9 so the world stays
+   visible above and below them instead of being covered */
+.mode-3d #home {
+    --pw: 1760px;
+    --ph: 660px;
+}
+
+.mode-3d #services {
+    --pw: 1760px;
+    /* seven cards in a 3-wide grid = three rows, plus slack so a
+       different font fallback cannot push the last row out */
+    --ph: 1080px;
+}
+
+.mode-3d #resume {
+    --pw: 1800px;
+    /* sized for the longest tab - the panel no longer clips, so anything
+       taller than this spills out below it */
+    --ph: 960px;
+}
+
+.mode-3d #portfolio {
+    --pw: 1900px;
+    --ph: 940px;
+}
+
+.mode-3d #affiliates {
+    --pw: 1560px;
+    --ph: 700px;
+}
+
+.mode-3d #contact {
+    --pw: 1720px;
+    --ph: 860px;
+}
+
+/* --- per-section fixes for fixed-size panels --- */
+
+/* vw units resolve against the viewport, not the panel */
+.mode-3d .home-img .img-box {
+    width: 400px;
+    height: 400px;
+}
+
+.mode-3d .home {
+    gap: 3.5rem;
+    animation: none;
+}
+
+.mode-3d .services-container {
+    padding-top: 2.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    transform-style: preserve-3d;
+}
+
+.mode-3d .services-container .services-box {
+    animation: none;
+    transform-style: preserve-3d;
+    transform:
+        translateZ(var(--cz, 0px))
+        rotateX(var(--crx, 0deg))
+        rotateY(var(--cry, 0deg));
+    transition: transform .35s cubic-bezier(0.22, 1, 0.36, 1), border-color .35s ease, box-shadow .35s ease;
+}
+
+/* the flat hover lift would fight the cursor tilt, so it is redefined here.
+   the lift used to be 90px, which was enough for a raised card to punch
+   through the one behind it once the grid gained a third row. 44px still
+   reads as "this one is picked up" without colliding. */
+.mode-3d .services-container .services-box:hover {
+    transform:
+        translateZ(calc(var(--cz, 0px) + 44px))
+        rotateX(var(--crx, 0deg))
+        rotateY(var(--cry, 0deg));
+    z-index: 2;
+}
+
+/* a scroll box nested inside a CSS3D panel is awkward - the wheel is already
+   the fly-between-stations control - and it also disappears entirely under
+   software compositing. The list runs full height and #resume is sized to
+   hold the longest tab instead. */
+.mode-3d .resume-list {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+    gap: 1rem;
+}
+
+.mode-3d .resume-item {
+    padding: 1.3rem 1.7rem;
+}
+
+/* --- portfolio coverflow --- */
+.mode-3d .portfolio-box {
+    gap: 3.5rem;
+    grid-template-columns: 0.72fr 1.28fr;
+}
+
+/* clipped so the receding slides never crawl over the copy */
+.mode-3d .portfolio-box .portfolio-carousel {
+    height: 60rem;
+    overflow: hidden;
+    border: none;
+    box-shadow: none;
+    perspective: 1800px;
+}
+
+.mode-3d .portfolio-carousel .img-slide {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    gap: 0;
+    transform: none !important;
+    transform-style: preserve-3d;
+}
+
+/* inset from the clip box so the slides behind can peek out
+   at the sides instead of hiding under the front one */
+.mode-3d .portfolio-carousel .img-item {
+    position: absolute;
+    top: 0;
+    left: 7%;
+    width: 86%;
+    height: 100%;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid rgb(var(--main-rgb) / 0.18);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
+    backface-visibility: hidden;
+    transition: transform .65s cubic-bezier(0.22, 1, 0.36, 1), opacity .65s ease;
+}
+
+/* neighbours stay clickable so you can pull one to the front, but only the
+   front slide gets its video controls */
+.mode-3d .portfolio-carousel .img-item:not(.is-front) {
+    cursor: pointer;
+}
+
+.mode-3d .portfolio-carousel .img-item:not(.is-front) video {
+    pointer-events: none;
+}
+
+.mode-3d .portfolio-carousel .img-item.is-front {
+    border-color: rgb(var(--main-rgb) / 0.4);
+    box-shadow:
+        0 30px 70px rgba(0, 0, 0, 0.6),
+        0 0 40px rgb(var(--main-rgb) / 0.18);
+}
+
+/* --- hover depth for the cards in every other section --- */
+/* the containers share the panel's 3D space rather than opening a new
+   perspective, which is what the services grid already does and what
+   keeps the card contents painting */
+.mode-3d .resume-list,
+.mode-3d .resume-nav,
+.mode-3d .contact-info,
+.mode-3d .chip-row,
+.mode-3d .social-media {
+    transform-style: preserve-3d;
+}
+
+.mode-3d .resume-item,
+.mode-3d .resume-btn,
+.mode-3d .info-row,
+.mode-3d .affiliate-card,
+.mode-3d .chip,
+.mode-3d .social-media a {
+    transform-style: preserve-3d;
+    transform:
+        translateZ(var(--cz, 0px))
+        rotateX(var(--crx, 0deg))
+        rotateY(var(--cry, 0deg));
+    transition: transform .35s cubic-bezier(0.22, 1, 0.36, 1), border-color .35s ease, box-shadow .35s ease, background .3s ease, color .3s ease;
+}
+
+.mode-3d .resume-item:hover,
+.mode-3d .info-row:hover,
+.mode-3d .affiliate-card:hover {
+    --cz: 60px;
+}
+
+.mode-3d .resume-btn:hover,
+.mode-3d .chip:hover,
+.mode-3d .social-media a:hover {
+    --cz: 34px;
+}
+
+/* --- affiliates / contact breathing room --- */
+.mode-3d .affiliates-container,
+.mode-3d .contact-container {
+    margin-top: 1rem;
+}
+
+/* a 3D layer nested inside the panel's own 3D context buys almost nothing
+   here and drops out under software compositing - the card still tilts,
+   its contents just sit flat on it */
+.mode-3d .affiliate-card {
+    transform-style: flat;
+}
+
+.mode-3d .affiliate-logo,
+.mode-3d .affiliate-card h3,
+.mode-3d .affiliate-card p {
+    transform: none;
+}
+
+/* same reasoning as the resume list: a textarea is a scroll container,
+   so script.js grows it to fit instead of scrolling it */
+.mode-3d .field textarea {
+    overflow: hidden;
+    resize: none;
+}
+
+/* --- header reads as a hud --- */
+.mode-3d header {
+    background: rgba(24, 23, 23, 0.72);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgb(var(--main-rgb) / 0.14);
+}
+
+/* --- first-paint fade so the world eases in --- */
+.mode-3d #world-gl,
+.mode-3d #world-css,
+.mode-3d #world-haze,
+.mode-3d #world-rail {
+    opacity: 0;
+    transition: opacity 1.2s ease;
+}
+
+.mode-3d.world-ready #world-gl,
+.mode-3d.world-ready #world-css,
+.mode-3d.world-ready #world-haze,
+.mode-3d.world-ready #world-rail {
+    opacity: 1;
+}
+
+/* ===================================================
+   3D ON MOBILE
+   ---------------------------------------------------
+   The desktop panels are ~1800px wide. To fit one of those on a
+   400px phone the camera has to sit far enough back that 15px body
+   text lands at roughly 4px on screen - unreadable.
+
+   So on small viewports the panels become phone-shaped instead:
+   about the size of the screen itself, portrait, one column, with
+   the content scrolling *inside* the panel. The camera then sits
+   close and text renders near its true size.
+
+   Scrolling inside a panel is safe - only clipping on the <section>
+   element itself breaks CSS3D hit-testing, not clipping on the
+   containers within it.
+   =================================================== */
+@media (max-width: 900px) {
+
+    /* --- panels become phone-shaped --- */
+    .mode-3d section {
+        padding: 2rem 1.6rem;
+        border-radius: 1.8rem;
+        /* one size for every station: content scrolls rather than the
+           panel growing, which would push the camera back again */
+        --pw: 420px;
+        --ph: 780px;
+    }
+
+    .mode-3d #home,
+    .mode-3d #services,
+    .mode-3d #resume,
+    .mode-3d #portfolio,
+    .mode-3d #affiliates,
+    .mode-3d #contact {
+        --pw: 420px;
+        --ph: 780px;
+    }
+
+    /* --- the scrolling body of each panel ---
+       everything below the heading scrolls; momentum scrolling is
+       enabled so it feels native under a thumb */
+    .mode-3d .services-container,
+    .mode-3d .resume-container,
+    .mode-3d .portfolio-container,
+    .mode-3d .affiliates-container,
+    .mode-3d .contact-container,
+    .mode-3d .home-content {
+        max-height: 620px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+        scrollbar-width: thin;
+        scrollbar-color: rgb(var(--main-rgb) / .3) transparent;
+        /* without this, grid and flex rows are squeezed down to the capped
+           height instead of overflowing it - so there is nothing to scroll,
+           and .contact-form (which clips itself for the glow effect) simply
+           hides its own lower half */
+        align-content: start;
+    }
+
+    .mode-3d .services-container::-webkit-scrollbar,
+    .mode-3d .resume-container::-webkit-scrollbar,
+    .mode-3d .portfolio-container::-webkit-scrollbar,
+    .mode-3d .contact-container::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .mode-3d .services-container::-webkit-scrollbar-thumb,
+    .mode-3d .resume-container::-webkit-scrollbar-thumb,
+    .mode-3d .portfolio-container::-webkit-scrollbar-thumb,
+    .mode-3d .contact-container::-webkit-scrollbar-thumb {
+        background: rgb(var(--main-rgb) / .3);
+        border-radius: 4px;
+    }
+
+    /* --- single column everywhere --- */
+    .mode-3d .home {
+        flex-direction: column-reverse;
+        gap: 1.6rem;
+        text-align: center;
+    }
+
+    .mode-3d .home-img .img-box {
+        width: 190px;
+        height: 190px;
+    }
+
+    .mode-3d .home-actions,
+    .mode-3d .social-media {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .mode-3d .services-container {
+        grid-template-columns: 1fr;
+        gap: 1.4rem;
+        padding-top: 1.4rem;
+    }
+
+    /* the staggered resting depth reads as misalignment on a small
+       panel, so cards sit flat and only lift on tap */
+    .mode-3d .services-container .services-box {
+        --cz: 0px !important;
+    }
+
+    .mode-3d .resume-container {
+        grid-template-columns: 1fr;
+        gap: 1.4rem;
+    }
+
+    /* tabs go back to a horizontal wrapping row */
+    .mode-3d .resume-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .mode-3d .resume-list {
+        height: auto;
+    }
+
+    .mode-3d .portfolio-box {
+        grid-template-columns: 1fr;
+        gap: 1.4rem;
+    }
+
+    .mode-3d .portfolio-carousel {
+        height: 26rem;
+    }
+
+    .mode-3d .affiliate-card.featured {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .mode-3d .contact-container {
+        grid-template-columns: 1fr;
+        gap: 1.6rem;
+    }
+
+    .mode-3d .contact-form {
+        padding: 1.8rem;
+    }
+
+    .mode-3d .field-row {
+        grid-template-columns: 1fr;
+    }
+
+    /* --- touch targets ---
+       7px rail dots are far too small for a thumb; they get a bigger
+       invisible hit area and sit along the bottom instead of the side */
+    .mode-3d #world-rail {
+        right: 50%;
+        top: auto;
+        bottom: 1.2rem;
+        transform: translateX(50%);
+        flex-direction: row;
+        gap: 1.6rem;
+        padding: .8rem 1.4rem;
+        background: rgba(22, 24, 28, .72);
+        border: 1px solid rgb(var(--main-rgb) / .2);
+        border-radius: 2rem;
+        backdrop-filter: blur(10px);
+    }
+
+    #world-rail button {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    /* invisible 44px tap area around each dot - the WCAG minimum */
+    #world-rail button::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 44px;
+        height: 44px;
+        transform: translate(-50%, -50%);
+    }
+
+    /* labels would overlap in a horizontal rail */
+    #world-rail button span {
+        display: none;
+    }
+
+    /* keep the mode pill clear of the rail */
+    .mode-toggle {
+        bottom: 5.5rem;
+    }
+
+    /* the cursor tilt has no meaning without a cursor */
+    .mode-3d .resume-item,
+    .mode-3d .resume-btn,
+    .mode-3d .info-row,
+    .mode-3d .affiliate-card,
+    .mode-3d .chip,
+    .mode-3d .social-media a,
+    .mode-3d .services-container .services-box {
+        --crx: 0deg !important;
+        --cry: 0deg !important;
+    }
+}
+
+/* --- hint wording follows the input device --- */
+.hint-touch { display: none; }
+
+@media (pointer: coarse) {
+    .hint-pointer { display: none; }
+    .hint-touch { display: inline; }
+}
+
+/* the 3D resume panel is taller than the flat one, so it reserves more —
+   same purpose: the tab column must not move between tabs. Experience is
+   the tallest here at ~632px, hence 68rem. */
+.mode-3d .resume-panels {
+    min-height: 68rem;
+}
+
+@media (max-width: 900px) {
+    /* stacked on a phone, so there is nothing to keep aligned */
+    .mode-3d .resume-panels {
+        min-height: 0;
+    }
+}

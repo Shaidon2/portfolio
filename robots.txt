@@ -1,0 +1,6 @@
+# Everything on this site is public — let every search engine read all of it.
+User-agent: *
+Allow: /
+
+# Where the sitemap lives, so crawlers find every page without guessing.
+Sitemap: https://shaidon.co.za/sitemap.xml
