@@ -44,6 +44,16 @@ const cssScene = new THREE.Scene();
 // rendering nine times the pixels of a logical one - enough to drop frames
 // on mid-range hardware.
 const MOBILE = window.innerWidth <= 900;
+const COARSE = window.matchMedia('(pointer: coarse)').matches;
+
+// How far the camera may drift from the panel it is parked at.
+// The phone values are scaled down, not switched off. A phone panel sits
+// with only ~24 world units of margin either side (the panel is 420 wide in
+// a ~487-unit view), so 85 units of sideways sway walks its edge clean off
+// the screen. 18 keeps the movement visible but inside the margin.
+const SWAY = (MOBILE || COARSE)
+    ? { x: 13, y: 20, idle: 5, yaw: 0.006, pitch: 0.004 }
+    : { x: 85, y: 55, idle: 9, yaw: 0.018, pitch: 0.012 };
 
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 10, 60000);
 
@@ -765,13 +775,17 @@ window.addEventListener('wheel', event => {
 // are the only way between stations. Only *horizontal* swipes fly the
 // camera; vertical is left alone so panel content can still be scrolled
 // with a thumb.
-if (window.matchMedia('(pointer: coarse)').matches) {
+if (COARSE) {
     let swipe = null;
 
     // the browser's own back/forward gesture starts at the very edge of the
     // screen, and people rely on it. Ignore touches that begin there and let
     // the browser have them, rather than trying to win a fight with it.
     const EDGE = 32;
+
+    // set when a swipe actually moved the camera, so the click it leaves
+    // behind can be cancelled
+    let swipedAway = false;
 
     window.addEventListener('touchstart', event => {
         if (event.touches.length !== 1) return;
@@ -782,10 +796,13 @@ if (window.matchMedia('(pointer: coarse)').matches) {
             return;
         }
 
-        // the carousel runs its own horizontal drag, and form fields need
-        // their own touch handling - don't steal from either
+        // Only form controls are skipped - they handle their own touches.
+        // Links and buttons deliberately do NOT block a swipe: the affiliates
+        // panel is one big <a> and the portfolio panel is mostly carousel, so
+        // excluding either left no way to swipe onward to contact. The stray
+        // click a swipe leaves behind is cancelled further down instead.
         const target = event.target;
-        if (target.closest('.portfolio-carousel, input, textarea, button, a')) {
+        if (target.closest('input, textarea, select')) {
             swipe = null;
             return;
         }
@@ -818,20 +835,55 @@ if (window.matchMedia('(pointer: coarse)').matches) {
         goTo(clamp(current + (dx < 0 ? 1 : -1), 0, panels.length - 1));
     }, { passive: false });
 
-    window.addEventListener('touchend', () => { swipe = null; }, { passive: true });
+    // a swipe that started on a link or a card would otherwise finish as a
+    // click on it - swallow that one click, so swiping never opens something
+    window.addEventListener('click', event => {
+        if (!swipedAway) return;
+        swipedAway = false;
+        event.preventDefault();
+        event.stopPropagation();
+    }, { capture: true });
+
+    window.addEventListener('touchend', () => {
+        swipedAway = !!(swipe && swipe.done);
+        swipe = null;
+    }, { passive: true });
 }
 
 // ---------------------------------------------------
 // cards tilt toward the cursor, in every section
 // ---------------------------------------------------
+// getBoundingClientRect on a CSS3D-transformed card is not free, and
+// pointermove outruns the display. Collapse a burst into one job per frame.
+const perFrame = handler => {
+    let queued = false;
+    let x = 0;
+    let y = 0;
+
+    return event => {
+        x = event.clientX;
+        y = event.clientY;
+        if (queued) return;
+
+        queued = true;
+        requestAnimationFrame(() => {
+            queued = false;
+            handler(x, y);
+        });
+    };
+};
+
 const tiltCard = (card, strength) => {
-    card.addEventListener('pointermove', event => {
+    // no cursor to follow on a phone, so the listener is never attached
+    if (COARSE) return;
+
+    card.addEventListener('pointermove', perFrame((px, py) => {
         const rect = card.getBoundingClientRect();
-        const nx = (event.clientX - rect.left) / rect.width - 0.5;
-        const ny = (event.clientY - rect.top) / rect.height - 0.5;
+        const nx = (px - rect.left) / rect.width - 0.5;
+        const ny = (py - rect.top) / rect.height - 0.5;
         card.style.setProperty('--cry', `${nx * strength}deg`);
         card.style.setProperty('--crx', `${-ny * strength}deg`);
-    });
+    }));
 
     card.addEventListener('pointerleave', () => {
         card.style.setProperty('--cry', '0deg');
@@ -927,22 +979,25 @@ if (carouselItems.length) {
         });
     });
 
-    // drag sideways to spin the coverflow
+    // drag sideways to spin the coverflow.
+    // Mouse only. The carousel fills most of the portfolio panel, so on a
+    // phone owning the horizontal axis here would trap the visitor: there
+    // would be no way to swipe past portfolio to affiliates or contact.
+    // Touch users change slides with the arrows or by tapping a slide.
     const carousel = document.querySelector('.portfolio-carousel');
     let drag = null;
 
     carousel.addEventListener('pointerdown', event => {
+        if (COARSE) return;
         if (event.target.closest('video')) return;
-        drag = { x: event.clientX, from: activeSlide(), moved: false };
+        drag = { x: event.clientX, from: activeSlide() };
         carousel.setPointerCapture(event.pointerId);
     });
 
     carousel.addEventListener('pointermove', event => {
         if (!drag) return;
 
-        const steps = Math.round((drag.x - event.clientX) / 140);
-        if (steps !== 0) drag.moved = true;
-        showSlide(drag.from + steps);
+        showSlide(drag.from + Math.round((drag.x - event.clientX) / 140));
     });
 
     const endDrag = event => {
@@ -958,14 +1013,22 @@ if (carouselItems.length) {
 // ---------------------------------------------------
 // resize
 // ---------------------------------------------------
+// resize fires continuously while a window is dragged, and measurePanels
+// reads the layout of all six panels. Resize the canvases immediately so
+// nothing looks stretched, but re-measure only once the dragging stops.
+let resizeTimer = 0;
+
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
     cssRenderer.setSize(window.innerWidth, window.innerHeight);
 
-    measurePanels();
-    if (!flight) basePosition.copy(panels[current].anchor);
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        measurePanels();
+        if (!flight) basePosition.copy(panels[current].anchor);
+    }, 140);
 });
 
 // ---------------------------------------------------
@@ -1013,12 +1076,12 @@ const animate = () => {
     up.set(0, 1, 0).applyQuaternion(baseQuaternion);
 
     camera.position.copy(basePosition)
-        .addScaledVector(right, pointer.x * 85)
-        .addScaledVector(up, -pointer.y * 55 + Math.sin(elapsed * 0.4) * 9);
+        .addScaledVector(right, pointer.x * SWAY.x)
+        .addScaledVector(up, -pointer.y * SWAY.y + Math.sin(elapsed * 0.4) * SWAY.idle);
 
     camera.quaternion.copy(baseQuaternion);
-    camera.rotateY(-pointer.x * 0.018);
-    camera.rotateX(pointer.y * 0.012);
+    camera.rotateY(-pointer.x * SWAY.yaw);
+    camera.rotateX(pointer.y * SWAY.pitch);
 
     if (flight) {
         const t = easeInOut(clamp((performance.now() - flight.start) / flight.duration, 0, 1));

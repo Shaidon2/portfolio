@@ -274,6 +274,27 @@ if (typed) {
 // is written to CSS custom properties so the stylesheet decides how
 // to use it.
 // ===================================================
+// pointermove can fire several times per displayed frame, and every handler
+// below measures an element before it writes. Doing that per event forces a
+// layout each time; this collapses a burst of moves into one job per frame.
+const perFrame = handler => {
+    let queued = false;
+    let x = 0;
+    let y = 0;
+
+    return event => {
+        x = event.clientX;
+        y = event.clientY;
+        if (queued) return;
+
+        queued = true;
+        requestAnimationFrame(() => {
+            queued = false;
+            handler(x, y);
+        });
+    };
+};
+
 document.querySelectorAll('[data-tilt]').forEach(host => {
     // the portrait tilts its inner box; everything else tilts itself
     const target = host.matches('.home-img') ? host.querySelector('.img-box') : host;
@@ -281,14 +302,14 @@ document.querySelectorAll('[data-tilt]').forEach(host => {
 
     const strength = host.matches('.home-img') ? 16 : 11;
 
-    host.addEventListener('pointermove', event => {
+    host.addEventListener('pointermove', perFrame((px, py) => {
         const rect = host.getBoundingClientRect();
-        const nx = (event.clientX - rect.left) / rect.width - 0.5;   // -0.5 .. 0.5
-        const ny = (event.clientY - rect.top) / rect.height - 0.5;
+        const nx = (px - rect.left) / rect.width - 0.5;   // -0.5 .. 0.5
+        const ny = (py - rect.top) / rect.height - 0.5;
 
         target.style.setProperty('--ty', `${nx * strength}deg`);
         target.style.setProperty('--tx', `${-ny * strength}deg`);
-    });
+    }));
 
     host.addEventListener('pointerleave', () => {
         target.style.setProperty('--ty', '0deg');
@@ -302,12 +323,12 @@ document.querySelectorAll('[data-tilt]').forEach(host => {
 // Buttons drift a little towards the cursor while it is over them.
 // ===================================================
 document.querySelectorAll('.magnetic').forEach(button => {
-    button.addEventListener('pointermove', event => {
+    button.addEventListener('pointermove', perFrame((px, py) => {
         const rect = button.getBoundingClientRect();
-        const x = event.clientX - rect.left - rect.width / 2;
-        const y = event.clientY - rect.top - rect.height / 2;
+        const x = px - rect.left - rect.width / 2;
+        const y = py - rect.top - rect.height / 2;
         button.style.transform = `translate(${x * 0.18}px, ${y * 0.28}px)`;
-    });
+    }));
 
     button.addEventListener('pointerleave', () => {
         button.style.transform = '';
@@ -330,11 +351,11 @@ const messageCount = document.getElementById('message-count');
 // under the cursor. All the rendering is CSS — this only reports where
 // the pointer is.
 if (form) {
-    form.addEventListener('pointermove', event => {
+    form.addEventListener('pointermove', perFrame((px, py) => {
         const rect = form.getBoundingClientRect();
-        form.style.setProperty('--mx', `${((event.clientX - rect.left) / rect.width) * 100}%`);
-        form.style.setProperty('--my', `${((event.clientY - rect.top) / rect.height) * 100}%`);
-    });
+        form.style.setProperty('--mx', `${((px - rect.left) / rect.width) * 100}%`);
+        form.style.setProperty('--my', `${((py - rect.top) / rect.height) * 100}%`);
+    }));
 
     // park the glow at the top centre so it fades out from a sensible spot
     form.addEventListener('pointerleave', () => {
@@ -438,7 +459,13 @@ const mouseEffectCanvas = document.getElementById('mouse-effect-canvas');
 
 if (mouseEffectCanvas && !document.documentElement.classList.contains('mode-3d')) {
     const ctx = mouseEffectCanvas.getContext('2d');
-    let particles = [];
+    const particles = [];
+
+    // hard ceiling: without one, a fast cursor on a slow frame can queue
+    // hundreds of gradients and each one costs a full radial fill
+    const MAX_PARTICLES = 150;
+
+    let running = false;
 
     const resizeCanvas = () => {
         mouseEffectCanvas.width = window.innerWidth;
@@ -450,6 +477,8 @@ if (mouseEffectCanvas && !document.documentElement.classList.contains('mode-3d')
 
     // spawn a puff of particles at a point, each with its own drift and life
     const addParticles = (x, y, count = 4) => {
+        if (particles.length >= MAX_PARTICLES) return;
+
         for (let i = 0; i < count; i++) {
             particles.push({
                 x,
@@ -459,9 +488,10 @@ if (mouseEffectCanvas && !document.documentElement.classList.contains('mode-3d')
                 vx: (Math.random() - 0.5) * 2.5,
                 vy: (Math.random() - 0.5) * 2.5,
                 life: 30 + Math.random() * 20,
-                hue: 190 + Math.random() * 30,
             });
         }
+
+        start();
     };
 
     window.addEventListener('mousemove', event => {
@@ -498,21 +528,44 @@ if (mouseEffectCanvas && !document.documentElement.classList.contains('mode-3d')
 
     const animateParticles = () => {
         ctx.clearRect(0, 0, mouseEffectCanvas.width, mouseEffectCanvas.height);
-        particles = particles.filter(p => p.life > 0 && p.alpha > 0);
 
-        for (const particle of particles) {
+        // compacted in place: the old version rebuilt the array with filter()
+        // on every single frame, which churned the garbage collector for no
+        // reason. `write` is where the next surviving particle goes.
+        let write = 0;
+
+        for (let read = 0; read < particles.length; read++) {
+            const particle = particles[read];
+
             particle.x += particle.vx;
             particle.y += particle.vy;
             particle.alpha -= 0.028;   // fade
             particle.life -= 1;
             particle.radius *= 0.96;   // shrink
+
+            if (particle.life <= 0 || particle.alpha <= 0) continue;
+
             drawParticle(particle);
+            particles[write++] = particle;
+        }
+
+        particles.length = write;
+
+        // stop the loop once the trail has died out, rather than repainting
+        // an empty canvas sixty times a second for the rest of the visit
+        if (!particles.length) {
+            running = false;
+            return;
         }
 
         requestAnimationFrame(animateParticles);
     };
 
-    animateParticles();
+    function start() {
+        if (running) return;
+        running = true;
+        requestAnimationFrame(animateParticles);
+    }
 }
 
 
@@ -855,10 +908,19 @@ if (lightbox) {
         stage.innerHTML = '';   // stops the video and frees the decoder
     };
 
+    // which slide is currently the one being shown
+    const frontSlide = () => Math.max(0, lightboxDetails.findIndex(d => d.classList.contains('active')));
+
     lightboxItems.forEach((item, index) => {
         item.addEventListener('click', event => {
             // let the inline video controls do their job instead
             if (event.target.closest('video')) return;
+
+            // tapping a slide off to the side means "bring that one forward",
+            // which world.js handles. Only the piece already in front opens
+            // full screen — otherwise the two behaviours fight each other.
+            if (index !== frontSlide()) return;
+
             openLightbox(index);
         });
     });
